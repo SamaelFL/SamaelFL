@@ -17,7 +17,10 @@
 <img src="assets/bitacora.svg" alt="Bitácora de la semana. Un modelo lee mis commits públicos y escribe aquí qué construí. Sin editar." width="100%">
 
 <!-- changelog:start -->
-_Todavía no hay corridas: el primer resumen llega el lunes después del primer commit público._
+- Renombré mi proyecto Chambeadores, le agregué un GIF al README y publiqué una demo en GitHub Pages.
+- Armé una oficina virtual isométrica con ambiente nocturno, con la caseta del látigo como escena principal.
+
+<sub>semana al 2026-10-11 · resumido por un modelo a partir de 2 commits en 1 repo</sub>
 <!-- changelog:end -->
 
 <p align="center">
