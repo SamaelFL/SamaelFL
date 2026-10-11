@@ -82,6 +82,10 @@ def main():
         print("sin repos en la lista blanca; no hay nada que resumir")
         return
 
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        print("falta el secret ANTHROPIC_API_KEY; se queda el resumen anterior")
+        return
+
     commits = weekly_commits(repos, profile["user"], os.environ["GITHUB_TOKEN"])
     if not commits:
         print("sin commits esta semana; se queda el resumen anterior")

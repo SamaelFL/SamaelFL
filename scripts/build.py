@@ -212,9 +212,9 @@ def product(d, i):
         f'<rect width="{w}" height="200" fill="url(#spot)"/>',
         product_object(svg, d["object"], w / 2, 120, 250, 128),
     )
-    live = d["status"] == "live"
-    color = C["verde"] if live else C["acento"]
-    label = "En producción" if live else "Próximamente"
+    live = d["status"] in ("live", "open")
+    color = C["verde"] if d["status"] == "live" else C["apoyo"] if d["status"] == "open" else C["acento"]
+    label = {"live": "En producción", "open": "Código abierto"}.get(d["status"], "Próximamente")
     if live:
         svg.add(
             f'<circle cx="30" cy="34" r="3.5" fill="{color}"/><circle cx="30" cy="34" r="3.5" fill="none" stroke="{color}">'

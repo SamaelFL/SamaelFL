@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-<a href="https://github.com/SamaelFL"><img src="assets/producto-3.svg" alt="Oficina virtual con látigo: Cada latigazo reparte un trabajo largo entre peones (subagentes) según el stack del proyecto. Con sonido." width="49%"></a>
+<a href="https://github.com/SamaelFL/Chambeadores"><img src="assets/producto-3.svg" alt="Chambeadores: Oficina virtual con látigo: cada latigazo reparte el trabajo largo entre peones (subagentes). Con sonido." width="49%"></a>
 <a href="https://github.com/SamaelFL"><img src="assets/producto-4.svg" alt="Kit SaaS LATAM: Skills para agentes con lo que nadie te explica en México: LFPDPPP, CFDI, MercadoPago, RLS y seguridad." width="49%"></a>
 </p>
 

@@ -47,12 +47,12 @@
       "url": "https://hiredgecv.com"
     },
     {
-      "name": "Oficina virtual con látigo",
-      "status": "soon",
+      "name": "Chambeadores",
+      "status": "open",
       "object": "peon",
-      "desc": "Cada latigazo reparte un trabajo largo entre peones (subagentes) según el stack del proyecto. Con sonido.",
-      "label": "Código abierto",
-      "url": "https://github.com/SamaelFL"
+      "desc": "Oficina virtual con látigo: cada latigazo reparte el trabajo largo entre peones (subagentes). Con sonido.",
+      "label": "github.com/SamaelFL/Chambeadores",
+      "url": "https://github.com/SamaelFL/Chambeadores"
     },
     {
       "name": "Kit SaaS LATAM",
@@ -124,5 +124,7 @@
     }
   ],
   "footer": "Cada imagen de este perfil sale de código: <code>scripts/build.py</code> dibuja la oficina caja por caja.",
-  "changelog_repos": []
+  "changelog_repos": [
+    "SamaelFL/Chambeadores"
+  ]
 }
