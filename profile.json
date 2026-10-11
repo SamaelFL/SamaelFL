@@ -2,61 +2,127 @@
   "user": "SamaelFL",
   "name": "Ismael Florean",
   "role": "AI Engineer",
-  "location": "CDMX",
   "company": "SAID Co.",
-  "tagline": "Construyo productos con IA de punta a punta: del prompt al deploy.",
-  "stream": [
-    "planeando la tarea en subagentes...",
-    "consultando el contexto con RAG...",
-    "evaluando la salida del modelo...",
-    "desplegando a producción."
+  "hero_lines": [
+    "Diseño el sistema.",
+    "Los agentes hacen",
+    "el turno de noche."
   ],
-  "whoami": [
-    ["role", "AI Engineer · founder de SAID Co."],
-    ["base", "Ciudad de México"],
-    ["builds", "productos con IA: coaches, generadores y agentes"],
-    ["loves", "orquestar modelos, RAG y automatizar lo aburrido"],
-    ["now", "llevando agentes a flujos reales de equipo"]
+  "hero_role": "AI Engineer en Ciudad de México. Fundador de SAID Co., donde construyo productos con IA de principio a fin.",
+  "hero_caption": "Oficina virtual, turno de noche. El del casco blanco soy yo.",
+  "hero_caption_right": "CDMX, 2:47 a. m.",
+  "statement": [
+    "La parte difícil no es el modelo.",
+    "Es que funcione un martes a las 3 a. m."
+  ],
+  "facts": [
+    [
+      "2",
+      "productos con IA en producción, con usuarios y planes de pago."
+    ],
+    [
+      "30+",
+      "skills propias que les enseñan a mis agentes cómo trabajo."
+    ],
+    [
+      "2023",
+      "el año de mi primera línea de código. Antes, ventas y operaciones."
+    ]
   ],
   "deployments": [
     {
       "name": "Gym Coach Pro",
-      "kind": "producto",
       "status": "live",
-      "desc": "Coach de gimnasio con IA: rutinas, comida y chat con base de conocimiento.",
-      "tags": ["Claude API", "RAG", "iOS"],
+      "object": "dumbbell",
+      "desc": "Coach de gimnasio con IA: rutinas según tu equipo y objetivo, y comidas armadas con lo que ya tienes.",
+      "label": "gymcoachpro.app",
       "url": "https://gymcoachpro.app"
     },
     {
       "name": "HiredgeCV",
-      "kind": "producto",
       "status": "live",
-      "desc": "CVs y cartas de presentación con IA, pensados para pasar filtros ATS.",
-      "tags": ["Claude API", "Supabase", "Pagos"],
+      "object": "cv",
+      "desc": "CVs y cartas de presentación con IA, ajustados a cada vacante y pensados para pasar filtros ATS.",
+      "label": "hiredgecv.com",
       "url": "https://hiredgecv.com"
     },
     {
       "name": "Oficina virtual con látigo",
-      "kind": "open source",
       "status": "soon",
-      "desc": "Cada latigazo reparte el trabajo largo entre peones (subagentes) según el stack.",
-      "tags": ["Agentes", "Subagentes", "CLI"],
+      "object": "peon",
+      "desc": "Cada latigazo reparte un trabajo largo entre peones (subagentes) según el stack del proyecto. Con sonido.",
+      "label": "Código abierto",
       "url": "https://github.com/SamaelFL"
     },
     {
       "name": "Kit SaaS LATAM",
-      "kind": "open source",
       "status": "soon",
-      "desc": "Skills para agentes: legal MX, pagos con Stripe y MercadoPago, seguridad y RLS.",
-      "tags": ["Skills", "LFPDPPP", "MercadoPago"],
+      "object": "toolbox",
+      "desc": "Skills para agentes con lo que nadie te explica en México: LFPDPPP, CFDI, MercadoPago, RLS y seguridad.",
+      "label": "Código abierto",
       "url": "https://github.com/SamaelFL"
     }
   ],
+  "stack_title": "Con qué construyo",
+  "stack_note": "Lo que corre hoy en producción",
   "stack": [
-    ["modelos", ["Claude API", "LLMs locales · Ollama", "Embeddings"]],
-    ["orquestación", ["Agentes y subagentes", "Tool use", "RAG · pgvector", "n8n"]],
-    ["producto", ["React", "TypeScript", "Vite", "Supabase", "Vercel", "Capacitor"]],
-    ["backend", ["Java 17", "Spring Boot", "PostgreSQL", "Node"]]
+    [
+      "modelos",
+      [
+        "Claude API",
+        "LLMs locales con Ollama",
+        "embeddings"
+      ]
+    ],
+    [
+      "orquestación",
+      [
+        "agentes y subagentes",
+        "tool use",
+        "RAG con pgvector",
+        "n8n"
+      ]
+    ],
+    [
+      "producto",
+      [
+        "React",
+        "TypeScript",
+        "Vite",
+        "Supabase",
+        "Vercel",
+        "Capacitor"
+      ]
+    ],
+    [
+      "backend",
+      [
+        "Java 17",
+        "Spring Boot",
+        "PostgreSQL",
+        "Node"
+      ]
+    ]
   ],
+  "log_title": "Bitácora de la semana",
+  "log_note": "Un modelo lee mis commits públicos y escribe aquí qué construí. Sin editar.",
+  "contact": [
+    {
+      "label": "LinkedIn",
+      "value": "in/ismaelflorean",
+      "url": "https://www.linkedin.com/in/ismaelflorean"
+    },
+    {
+      "label": "Gym Coach Pro",
+      "value": "gymcoachpro.app",
+      "url": "https://gymcoachpro.app"
+    },
+    {
+      "label": "HiredgeCV",
+      "value": "hiredgecv.com",
+      "url": "https://hiredgecv.com"
+    }
+  ],
+  "footer": "Cada imagen de este perfil sale de código: <code>scripts/build.py</code> dibuja la oficina caja por caja.",
   "changelog_repos": []
 }

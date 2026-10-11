@@ -1,27 +1,29 @@
-<a href="https://github.com/SamaelFL"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.svg"><img src="assets/banner-light.svg" alt="Ismael Florean · AI Engineer" width="100%"></picture></a>
+<a href="https://github.com/SamaelFL"><img src="assets/hero.svg" alt="Ismael Florean. Diseño el sistema. Los agentes hacen el turno de noche. Ilustración: oficina virtual en isométrico con un capataz y cuatro peones." width="100%"></a>
 
-### `01 tool_use` whoami()
+<img src="assets/manifiesto.svg" alt="La parte difícil no es el modelo. Es que funcione un martes a las 3 a. m. 2: productos con IA en producción, con usuarios y planes de pago. 30+: skills propias que les enseñan a mis agentes cómo trabajo. 2023: el año de mi primera línea de código. Antes, ventas y operaciones." width="100%">
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/whoami-dark.svg"><img src="assets/whoami-light.svg" alt="whoami: role: AI Engineer · founder de SAID Co.; base: Ciudad de México; builds: productos con IA: coaches, generadores y agentes; loves: orquestar modelos, RAG y automatizar lo aburrido; now: llevando agentes a flujos reales de equipo" width="100%"></picture>
-
-### `02 tool_use` list_deployments()
-
-<p>
-<a href="https://gymcoachpro.app"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/deploy-1-dark.svg"><img src="assets/deploy-1-light.svg" alt="Gym Coach Pro" width="49%"></picture></a>
-<a href="https://hiredgecv.com"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/deploy-2-dark.svg"><img src="assets/deploy-2-light.svg" alt="HiredgeCV" width="49%"></picture></a>
-</p><p>
-<a href="https://github.com/SamaelFL"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/deploy-3-dark.svg"><img src="assets/deploy-3-light.svg" alt="Oficina virtual con látigo" width="49%"></picture></a>
-<a href="https://github.com/SamaelFL"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/deploy-4-dark.svg"><img src="assets/deploy-4-light.svg" alt="Kit SaaS LATAM" width="49%"></picture></a>
+<p align="center">
+<a href="https://gymcoachpro.app"><img src="assets/producto-1.svg" alt="Gym Coach Pro: Coach de gimnasio con IA: rutinas según tu equipo y objetivo, y comidas armadas con lo que ya tienes." width="49%"></a>
+<a href="https://hiredgecv.com"><img src="assets/producto-2.svg" alt="HiredgeCV: CVs y cartas de presentación con IA, ajustados a cada vacante y pensados para pasar filtros ATS." width="49%"></a>
 </p>
 
-### `03 tool_result` context_window
+<p align="center">
+<a href="https://github.com/SamaelFL"><img src="assets/producto-3.svg" alt="Oficina virtual con látigo: Cada latigazo reparte un trabajo largo entre peones (subagentes) según el stack del proyecto. Con sonido." width="49%"></a>
+<a href="https://github.com/SamaelFL"><img src="assets/producto-4.svg" alt="Kit SaaS LATAM: Skills para agentes con lo que nadie te explica en México: LFPDPPP, CFDI, MercadoPago, RLS y seguridad." width="49%"></a>
+</p>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/stack-dark.svg"><img src="assets/stack-light.svg" alt="Stack: modelos: Claude API, LLMs locales · Ollama, Embeddings; orquestación: Agentes y subagentes, Tool use, RAG · pgvector, n8n; producto: React, TypeScript, Vite, Supabase, Vercel, Capacitor; backend: Java 17, Spring Boot, PostgreSQL, Node" width="100%"></picture>
+<img src="assets/stack.svg" alt="modelos: Claude API, LLMs locales con Ollama, embeddings; orquestación: agentes y subagentes, tool use, RAG con pgvector, n8n; producto: React, TypeScript, Vite, Supabase, Vercel, Capacitor; backend: Java 17, Spring Boot, PostgreSQL, Node" width="100%">
 
-### `04 tool_result` weekly_changelog
+<img src="assets/bitacora.svg" alt="Bitácora de la semana. Un modelo lee mis commits públicos y escribe aquí qué construí. Sin editar." width="100%">
 
 <!-- changelog:start -->
-> Todavía no hay corridas. Cada lunes un modelo lee mis commits públicos de la semana y escribe aquí qué construí.
+_Todavía no hay corridas: el primer resumen llega el lunes después del primer commit público._
 <!-- changelog:end -->
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/footer-dark.svg"><img src="assets/footer-light.svg" alt="end_turn" width="100%"></picture>
+<p align="center">
+<a href="https://www.linkedin.com/in/ismaelflorean"><img src="assets/contacto-1.svg" alt="LinkedIn: in/ismaelflorean" width="32%"></a>
+<a href="https://gymcoachpro.app"><img src="assets/contacto-2.svg" alt="Gym Coach Pro: gymcoachpro.app" width="32%"></a>
+<a href="https://hiredgecv.com"><img src="assets/contacto-3.svg" alt="HiredgeCV: hiredgecv.com" width="32%"></a>
+</p>
+
+<p align="center"><sub>Cada imagen de este perfil sale de código: <code>scripts/build.py</code> dibuja la oficina caja por caja.</sub></p>
