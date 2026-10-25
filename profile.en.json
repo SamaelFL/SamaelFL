@@ -80,8 +80,8 @@
       ]
     ],
     "statuses": [
-      "turn ends at 420k  →  compacts · re-reads 30k per step",
-      "Explore subagent  →  Sonnet · its own context",
+      "turn ends at 420k  →  compacts",
+      "Explore subagent  →  Sonnet",
       "turn ends at 150k  →  unchanged",
       "Plan subagent  →  stays on Opus"
     ],
