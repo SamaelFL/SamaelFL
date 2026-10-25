@@ -210,6 +210,6 @@
     "log_badge": "automatic · last 30 days",
     "hero_alt": "Illustration: isometric virtual office with a foreman and four workers.",
     "featured_alt": "Diagram: requests go through the classifier and land on Sonnet or Opus.",
-    "lang_switch": "<a href=\"https://github.com/SamaelFL\">Español</a> · <b>English</b>"
+    "switch_label": "Read in English"
   }
 }

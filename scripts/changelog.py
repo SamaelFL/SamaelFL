@@ -22,18 +22,17 @@ MODEL = os.environ.get("CHANGELOG_MODEL", "claude-haiku-5-5")
 DAYS = 30
 MAX_BULLETS = 3
 MAX_CHARS = 160
-BLOCK_RE = re.compile(r"(<!-- changelog:start -->\n).*?(<!-- changelog:end -->)", re.S)
 HASH_RE = re.compile(r"<!-- changelog:hash:([0-9a-f]+) -->")
 
 LANGS = {
     "es": {
-        "readme": "README.md",
+        "marker": "changelog",
         "img": "bitacora",
         "profile": "profile.json",
         "sub": "últimos {days} días · resumido por un modelo a partir de {n} commit{s} en {r} repo{rs} · último commit: {last}",
     },
     "en": {
-        "readme": "README.en.md",
+        "marker": "changelog-en",
         "img": "bitacora-en",
         "profile": "profile.en.json",
         "sub": "last {days} days · summarized by a model from {n} commit{s} in {r} repo{rs} · last commit: {last}",
@@ -147,18 +146,26 @@ def block_for(lang, bullets, commits, digest):
 
 
 def write_block(lang, block):
-    path = ROOT / LANGS[lang]["readme"]
-    if not path.exists():
-        return
+    path = ROOT / "README.md"
+    marker = LANGS[lang]["marker"]
     text = path.read_text()
-    new = BLOCK_RE.sub(lambda m: m.group(1) + block + m.group(2), text)
+    pattern = re.compile(rf"(<!-- {marker}:start -->\n).*?(<!-- {marker}:end -->)", re.S)
+    new = pattern.sub(lambda m: m.group(1) + block + m.group(2), text)
     if new != text:
         path.write_text(new)
 
 
 def current_hash():
-    m = HASH_RE.search((ROOT / "README.md").read_text())
-    return m.group(1) if m else ""
+    # Solo cuenta como al día si los dos idiomas tienen la bitácora con el mismo hash
+    text = (ROOT / "README.md").read_text()
+    hashes = set()
+    for cfg in LANGS.values():
+        m = re.search(rf"<!-- {cfg['marker']}:start -->\n(.*?)<!-- {cfg['marker']}:end -->", text, re.S)
+        h = HASH_RE.search(m.group(1)) if m else None
+        if not h:
+            return ""
+        hashes.add(h.group(1))
+    return hashes.pop() if len(hashes) == 1 else ""
 
 
 def main():

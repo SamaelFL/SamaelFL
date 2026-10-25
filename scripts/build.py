@@ -479,15 +479,20 @@ def contact(c):
 
 # ---------------------------------------------------------------- README
 
-BLOCK_RE = re.compile(r"<!-- changelog:start -->\n(.*?)<!-- changelog:end -->", re.S)
-
+# Un solo README: el español a la vista y el inglés en un desplegable arriba, para
+# que quien lo abra no salga del perfil. GitHub no permite JavaScript ni CSS, así
+# que un switch que reemplace el contenido no es posible.
 LANGS = {
-    "es": {"profile": "profile.json", "readme": "README.md", "suffix": ""},
-    "en": {"profile": "profile.en.json", "readme": "README.en.md", "suffix": "-en"},
+    "es": {"profile": "profile.json", "suffix": "", "marker": "changelog"},
+    "en": {"profile": "profile.en.json", "suffix": "-en", "marker": "changelog-en"},
 }
 
 
-def readme(p, cfg):
+def block_re(marker):
+    return re.compile(rf"<!-- {marker}:start -->\n(.*?)<!-- {marker}:end -->", re.S)
+
+
+def body(p, cfg):
     sfx = cfg["suffix"]
     ui = p["ui"]
 
@@ -495,10 +500,10 @@ def readme(p, cfg):
         return f'<img src="assets/{name}{sfx}.svg" alt="{escape(alt, {chr(34): "&quot;"})}" width="{width}">'
 
     # la bitácora la escribe changelog.py; aquí solo se conserva lo que ya haya
-    path = ROOT / cfg["readme"]
+    path = ROOT / "README.md"
     block = ""
     if path.exists():
-        m = BLOCK_RE.search(path.read_text())
+        m = block_re(cfg["marker"]).search(path.read_text())
         if m and "changelog:hash:" in m.group(1):
             block = m.group(1)
 
@@ -519,9 +524,8 @@ def readme(p, cfg):
         f = p["featured"]
         feat_alt = f"{f['name']}: {f['headline'][0]} {''.join(f['headline'][1:])} {f['desc']} {ui['featured_alt']}"
         feat = f'<a href="{f["url"]}">{img("destacado", feat_alt)}</a>\n\n'
-    return f"""<p align="right"><sub>{ui['lang_switch']}</sub></p>
-
-<a href="https://github.com/{p['user']}">{img('hero', hero_alt)}</a>
+    m = cfg["marker"]
+    return f"""<a href="https://github.com/{p['user']}">{img('hero', hero_alt)}</a>
 
 {feat}{img('manifiesto', ' '.join(p['statement']) + ' ' + facts)}
 
@@ -529,8 +533,8 @@ def readme(p, cfg):
 
 {img('stack', stack_alt)}
 
-<!-- changelog:start -->
-{block}<!-- changelog:end -->
+<!-- {m}:start -->
+{block}<!-- {m}:end -->
 
 <p align="center">
 {links}
@@ -544,8 +548,8 @@ def main():
     ASSETS.mkdir(exist_ok=True)
     for old in ASSETS.glob("*.svg"):
         old.unlink()
-    report = []
-    for cfg in LANGS.values():
+    report, bodies, labels = [], {}, {}
+    for lang, cfg in LANGS.items():
         p = json.loads((ROOT / cfg["profile"]).read_text())
         sfx = cfg["suffix"]
         out = {"hero": hero(p), "manifiesto": manifesto(p), "stack": stack(p), "bitacora": log_header(p)}
@@ -557,8 +561,14 @@ def main():
             out[f"contacto-{i + 1}"] = contact(c)
         for name, content in out.items():
             (ASSETS / f"{name}{sfx}.svg").write_text(content)
-        (ROOT / cfg["readme"]).write_text(readme(p, cfg))
-        report.append(f"{cfg['readme']}: " + ", ".join(f"{n} {len(c) // 1024}KB" for n, c in out.items()))
+        bodies[lang] = body(p, cfg)
+        labels[lang] = p["ui"].get("switch_label", "")
+        report.append(f"{lang}: " + ", ".join(f"{n} {len(c) // 1024}KB" for n, c in out.items()))
+    readme = (
+        f"<details>\n<summary><b>{labels['en']}</b></summary>\n<br>\n\n{bodies['en']}\n</details>\n\n"
+        + bodies["es"]
+    )
+    (ROOT / "README.md").write_text(readme)
     print("listo:\n" + "\n".join(report))
 
 
