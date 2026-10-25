@@ -21,6 +21,14 @@
 <img src="assets/stack-en.svg" alt="models: Claude API, local LLMs with Ollama, embeddings; orchestration: agents and subagents, tool use, RAG with pgvector, n8n; product: React, TypeScript, Vite, Supabase, Vercel, Capacitor; backend: Java 17, Spring Boot, PostgreSQL, Node" width="100%">
 
 <!-- changelog-en:start -->
+<img src="assets/bitacora-en.svg" alt="What I've been building. A model reads my public commits from the last 30 days and writes here what I built. Unedited." width="100%">
+
+- I renamed Chambeadores and added a live demo with its GIF in the README.
+- I built a nighttime isometric virtual office, with a whip to keep the team moving.
+- I configured the router to send easy tasks to Sonnet, cutting costs compared to Opus.
+
+<sub>last 30 days · summarized by a model from 8 commits in 3 repos · last commit: 2026-10-25</sub>
+<!-- changelog:hash:2ad61da5b73f -->
 <!-- changelog-en:end -->
 
 <p align="center">
@@ -54,12 +62,12 @@
 <!-- changelog:start -->
 <img src="assets/bitacora.svg" alt="Lo último que construí. Un modelo lee mis commits públicos de los últimos 30 días y escribe aquí qué construí. Sin editar." width="100%">
 
-- Renombré Chambeadores y publiqué su demo en GitHub Pages, con GIF en el README.
-- Construí una oficina virtual isométrica de noche, con caseta y ambiente nocturno.
-- Ajusté el enrutador para mandar tareas fáciles a Sonnet en vez de Opus.
+- Renombré Chambeadores y agregué una demo en línea con su GIF en el README.
+- Construí una oficina virtual isométrica nocturna, con un látigo para mover el ritmo del equipo.
+- Configuré el enrutador para mandar tareas sencillas a Sonnet, bajando costos frente a Opus.
 
-<sub>últimos 30 días · resumido por un modelo a partir de 3 commits en 2 repos · último commit: 2026-10-25</sub>
-<!-- changelog:hash:b87d7eb89f51 -->
+<sub>últimos 30 días · resumido por un modelo a partir de 8 commits en 3 repos · último commit: 2026-10-25</sub>
+<!-- changelog:hash:2ad61da5b73f -->
 <!-- changelog:end -->
 
 <p align="center">
