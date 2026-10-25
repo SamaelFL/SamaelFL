@@ -13,80 +13,92 @@
   "hero_caption_right": "CDMX, 2:47 a. m.",
   "featured": {
     "name": "enrutador",
-    "badge": "Código abierto · mod para Claude Code",
+    "badge": "v2 · código abierto · mod para Claude Code",
     "headline": [
-      "Mi plan de Claude se acababa a media semana.",
-      "Ahora cierro la semana con ",
-      "40%",
-      " de sobra."
+      "Lo medí con 275 turnos de mi historial.",
+      "Con la v2 gasto ",
+      "32%",
+      " menos."
     ],
-    "desc": "Un mod de ~500 líneas que decide, pedido por pedido, si basta Sonnet o hace falta Opus. Haiku clasifica en ~1 s y, ante la duda, gana Opus.",
+    "desc": "Compacta la sesión cuando el contexto pasa de 200k y corre los subagentes en Sonnet. La v1 solo cambiaba de modelo y ahorraba 0%: el medidor viene en el repo.",
     "requests": [
       [
-        "renombra esta variable",
+        "turno cierra en 420k",
         "sonnet"
       ],
       [
-        "¿qué hace este regex?",
+        "subagente Explore",
         "sonnet"
       ],
       [
-        "no funciona el login",
+        "turno cierra en 150k",
         "opus"
       ],
       [
-        "diseña la migración",
+        "subagente Plan",
         "opus"
       ]
     ],
     "classifier": [
-      "Haiku",
-      "clasifica · ~1 s"
+      "enrutador v2",
+      "al cerrar cada turno"
     ],
     "lanes": {
       "sonnet": [
-        "Sonnet",
-        "trivial y simple",
-        "low · medium"
+        "Ahorra",
+        "compacta · Sonnet",
+        "−32%"
       ],
       "opus": [
-        "Opus",
-        "delicado o con duda",
-        "medium · high"
+        "Sin cambios",
+        "contexto chico · Plan",
+        ""
       ]
     },
     "label": "github.com/SamaelFL/enrutador",
     "url": "https://github.com/SamaelFL/enrutador",
-    "week_title": "Mi plan en una semana",
-    "week_note": "mi uso real, no un benchmark",
+    "week_title": "Mis últimas 6 semanas",
+    "week_note": "costo equivalente de API, mismo historial",
     "days": [
-      "L",
-      "M",
-      "M",
-      "J",
-      "V",
-      "S",
-      "D"
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6"
     ],
     "rows": [
       [
-        "Solo Opus",
-        "antes",
-        "límite alcanzado · sin Claude el resto de la semana"
+        "Sin enrutador",
+        "37 sesiones · 275 turnos",
+        "$512"
       ],
       [
-        "Con enrutador",
-        "ahora",
-        "60% usado · 40% de sobra"
+        "Con enrutador v2",
+        "mismas sesiones",
+        "$346 · 32% menos"
       ]
     ],
     "statuses": [
-      "renombra esta variable  →  Sonnet · low · trivial",
-      "¿qué hace este regex?  →  Sonnet · low · trivial",
-      "no funciona el login  →  Opus · medium · media",
-      "diseña la migración  →  Opus · high · compleja"
+      "turno cierra en 420k  →  compacta · relee 30k por paso",
+      "subagente Explore  →  Sonnet · su propio contexto",
+      "turno cierra en 150k  →  sigue igual",
+      "subagente Plan  →  se queda en Opus"
     ],
-    "cta": "Pruébalo gratis · github.com/SamaelFL/enrutador"
+    "cta": "Mídelo con tu historial · github.com/SamaelFL/enrutador",
+    "bars": [
+      {
+        "frac": 1.0,
+        "hasta": 6,
+        "color": "texto2"
+      },
+      {
+        "frac": 0.676,
+        "hasta": 6,
+        "color": "apoyo"
+      }
+    ],
+    "compact_meter": true
   },
   "statement": [
     "La parte difícil no es el modelo.",
@@ -214,7 +226,7 @@
     },
     "log_badge": "automático · últimos 30 días",
     "hero_alt": "Ilustración: oficina virtual en isométrico con un capataz y cuatro peones.",
-    "featured_alt": "Diagrama: los pedidos pasan por el clasificador y llegan a Sonnet o a Opus.",
+    "featured_alt": "Diagrama: al cerrar cada turno el enrutador compacta si el contexto pasa de 200k y manda los subagentes a Sonnet; lo demás sigue igual.",
     "switch_label": "Español"
   }
 }

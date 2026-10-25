@@ -244,7 +244,8 @@ def featured(f):
     # ---- la semana: dos medidores que corren al mismo reloj
     T = 8.0            # duración del ciclo
     run = 6.3          # lo que tarda la semana en correr
-    day = run / 7
+    n = len(f["days"])
+    day = run / n
     kt = lambda t: f"{t / T:.4f}"
     top = 238
     svg.add(f'<line x1="48" y1="{top}" x2="{W - 48}" y2="{top}" stroke="{C["regla"]}"/>')
@@ -252,23 +253,29 @@ def featured(f):
     svg.add(svg.text(48, top + 54, f["week_note"], "gm4", 11, C["texto2"]))
 
     tx0, tx1 = 236, W - 48
-    cw = (tx1 - tx0) / 7
+    cw = (tx1 - tx0) / n
     # días
     for i, d in enumerate(f["days"]):
         cx = tx0 + cw * i + cw / 2
         svg.add(svg.text(cx, top + 40, d, "gm5", 12, C["texto2"], anchor="middle"))
-    hl_vals = ";".join(f"{tx0 + cw * min(i, 6) + 6:.1f}" for i in range(8))
-    hl_keys = ";".join(kt(min(i * day, run)) for i in range(7)) + ";1"
+    hl_vals = ";".join(f"{tx0 + cw * min(i, n - 1) + 6:.1f}" for i in range(n + 1))
+    hl_keys = ";".join(kt(min(i * day, run)) for i in range(n)) + ";1"
     svg.add(
         f'<rect y="{top + 22}" width="{cw - 12:.1f}" height="26" rx="7" fill="none" stroke="{C["acento"]}" stroke-opacity="0.8">'
         f'<animate attributeName="x" values="{hl_vals}" keyTimes="{hl_keys}" calcMode="discrete" dur="{T}s" repeatCount="indefinite"/></rect>'
     )
 
-    rows = [
-        (f["rows"][0], top + 92, rojo, 1.0, 4.5),
-        (f["rows"][1], top + 150, C["apoyo"], 0.6, 7.0),
+    # Cada barra: qué tan larga (frac), en qué columna termina (hasta) y si bloquea lo que sigue.
+    barras = f.get("bars") or [
+        {"frac": 1.0, "hasta": 4.5, "color": "rojo", "bloqueo": True},
+        {"frac": 0.6, "hasta": 7.0, "color": "apoyo"},
     ]
-    for (label, sub, end_text), ry, col, frac, days_to in rows:
+    colores = {"rojo": rojo, "apoyo": C["apoyo"], "texto2": C["texto2"], "acento": C["acento"]}
+    rows = [
+        (f["rows"][i], top + 92 + 58 * i, colores[b["color"]], b["frac"], b["hasta"], b.get("bloqueo", False))
+        for i, b in enumerate(barras)
+    ]
+    for (label, sub, end_text), ry, col, frac, days_to, bloqueo in rows:
         svg.add(svg.text(48, ry + 4, label, "gs5", 14, C["texto"]))
         svg.add(svg.text(48, ry + 22, sub, "gm4", 11, C["texto2"]))
         svg.add(f'<rect x="{tx0}" y="{ry - 8}" width="{tx1 - tx0}" height="16" rx="8" fill="{C["superficie"]}" stroke="{C["borde"]}"/>')
@@ -279,7 +286,7 @@ def featured(f):
             f'<animate attributeName="width" values="0;{full:.1f};{full:.1f};0" keyTimes="0;{kt(t_end)};{kt(T - 0.25)};1" '
             f'dur="{T}s" repeatCount="indefinite"/></rect>'
         )
-        if frac >= 1:
+        if bloqueo:
             # el plan se acaba: el resto de la semana queda bloqueado
             lock_x = tx0 + cw * days_to
             svg.add(
@@ -369,6 +376,26 @@ def featured(f):
         svg.add(svg.text(lx + 18, ty - 2, title, "as6", 18, C["texto"], spacing=-0.2))
         svg.add(svg.text(lx + 18, ty + 17, note, "gm4", 11, C["texto2"]))
         svg.add(svg.text(W - 64, ty - 2, effort, "gm4", 11, col, anchor="end"))
+        if lane == "sonnet" and f.get("compact_meter"):
+            # Medidor de contexto: crece, pasa la marca de 200k, destella y se compacta.
+            mx, mh = lx + 18, 3
+            mw, my = W - 64 - mx, ty + 23
+            umbral = mx + mw * 0.72
+            Tm = 4.2
+            svg.add(f'<rect x="{mx}" y="{my}" width="{mw}" height="{mh}" rx="1.5" fill="{C["borde"]}"/>')
+            svg.add(f'<line x1="{umbral:.1f}" y1="{my - 2}" x2="{umbral:.1f}" y2="{my + mh + 2}" stroke="{C["acento"]}" stroke-width="1.2"/>')
+            svg.add(
+                f'<rect x="{mx}" y="{my}" height="{mh}" rx="1.5" width="6" fill="{C["apoyo"]}">'
+                f'<animate attributeName="width" values="6;{mw * 0.62:.1f};{mw * 0.86:.1f};{mw * 0.86:.1f};6;6" '
+                f'keyTimes="0;0.5;0.66;0.72;0.8;1" calcMode="spline" '
+                f'keySplines="0.3 0 0.7 1;0.3 0 0.7 1;0 0 1 1;0.7 0 0.3 1;0 0 1 1" dur="{Tm}s" repeatCount="indefinite"/>'
+                f'<animate attributeName="fill" values="{C["apoyo"]};{C["apoyo"]};{C["acento"]};{C["acento"]};{C["apoyo"]};{C["apoyo"]}" '
+                f'keyTimes="0;0.55;0.62;0.78;0.8;1" dur="{Tm}s" repeatCount="indefinite"/></rect>'
+            )
+            svg.add(
+                f'<rect x="{lx}" y="{ty - 30}" width="{W - 48 - lx}" height="60" rx="12" fill="{C["acento"]}" fill-opacity="0.06" stroke="{C["acento"]}" opacity="0">'
+                f'<animate attributeName="opacity" values="0;0;0.9;0;0" keyTimes="0;0.7;0.76;0.9;1" dur="{Tm}s" repeatCount="indefinite"/></rect>'
+            )
 
     # puntos que viajan (encima de todo)
     for path, col, b in paths:

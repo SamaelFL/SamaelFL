@@ -13,80 +13,92 @@
   "hero_caption_right": "CDMX, 2:47 a.m.",
   "featured": {
     "name": "enrutador",
-    "badge": "Open source · Claude Code mod",
+    "badge": "v2 · open source · Claude Code mod",
     "headline": [
-      "My Claude plan ran out by midweek.",
-      "Now I end the week with ",
-      "40%",
-      " to spare."
+      "I measured it on 275 turns of my history.",
+      "With v2 I spend ",
+      "32%",
+      " less."
     ],
-    "desc": "A ~500-line mod that decides, request by request, whether Sonnet is enough or Opus is needed. Haiku classifies in ~1 s and, when in doubt, Opus wins.",
+    "desc": "It compacts the session when the context passes 200k and runs subagents on Sonnet. v1 only switched models and saved 0%: the measuring tool ships in the repo.",
     "requests": [
       [
-        "rename this variable",
+        "turn ends at 420k",
         "sonnet"
       ],
       [
-        "what does this regex do?",
+        "Explore subagent",
         "sonnet"
       ],
       [
-        "login is broken",
+        "turn ends at 150k",
         "opus"
       ],
       [
-        "design the migration",
+        "Plan subagent",
         "opus"
       ]
     ],
     "classifier": [
-      "Haiku",
-      "classifies · ~1 s"
+      "enrutador v2",
+      "when each turn ends"
     ],
     "lanes": {
       "sonnet": [
-        "Sonnet",
-        "trivial and simple",
-        "low · medium"
+        "Saves",
+        "compact · Sonnet",
+        "−32%"
       ],
       "opus": [
-        "Opus",
-        "sensitive or unsure",
-        "medium · high"
+        "Unchanged",
+        "small context · Plan",
+        ""
       ]
     },
     "label": "github.com/SamaelFL/enrutador",
     "url": "https://github.com/SamaelFL/enrutador",
-    "week_title": "My plan over one week",
-    "week_note": "my real usage, not a benchmark",
+    "week_title": "My last 6 weeks",
+    "week_note": "API-equivalent cost, same history",
     "days": [
-      "M",
-      "T",
-      "W",
-      "T",
-      "F",
-      "S",
-      "S"
+      "W1",
+      "W2",
+      "W3",
+      "W4",
+      "W5",
+      "W6"
     ],
     "rows": [
       [
-        "Opus only",
-        "before",
-        "limit hit · no Claude for the rest of the week"
+        "Without enrutador",
+        "37 sessions · 275 turns",
+        "$512"
       ],
       [
-        "With enrutador",
-        "now",
-        "60% used · 40% to spare"
+        "With enrutador v2",
+        "same sessions",
+        "$346 · 32% less"
       ]
     ],
     "statuses": [
-      "rename this variable  →  Sonnet · low · trivial",
-      "what does this regex do?  →  Sonnet · low · trivial",
-      "login is broken  →  Opus · medium · medium",
-      "design the migration  →  Opus · high · complex"
+      "turn ends at 420k  →  compacts · re-reads 30k per step",
+      "Explore subagent  →  Sonnet · its own context",
+      "turn ends at 150k  →  unchanged",
+      "Plan subagent  →  stays on Opus"
     ],
-    "cta": "Try it free · github.com/SamaelFL/enrutador"
+    "cta": "Measure it on your history · github.com/SamaelFL/enrutador",
+    "bars": [
+      {
+        "frac": 1.0,
+        "hasta": 6,
+        "color": "texto2"
+      },
+      {
+        "frac": 0.676,
+        "hasta": 6,
+        "color": "apoyo"
+      }
+    ],
+    "compact_meter": true
   },
   "statement": [
     "The hard part isn't the model.",
@@ -209,7 +221,7 @@
     },
     "log_badge": "automatic · last 30 days",
     "hero_alt": "Illustration: isometric virtual office with a foreman and four workers.",
-    "featured_alt": "Diagram: requests go through the classifier and land on Sonnet or Opus.",
+    "featured_alt": "Diagram: when each turn ends the router compacts if the context passes 200k and sends subagents to Sonnet; the rest stays as is.",
     "switch_label": "Read in English"
   }
 }
