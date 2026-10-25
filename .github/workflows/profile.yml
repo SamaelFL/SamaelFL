@@ -3,9 +3,9 @@ name: perfil
 on:
   push:
     branches: [main]
-    paths: [profile.json, scripts/build.py]
+    paths: [profile.json, profile.en.json, scripts/build.py]
   schedule:
-    - cron: "7 14 * * 1" # lunes 8:07 a. m. CDMX
+    - cron: "7 14 * * *" # diario, 8:07 a. m. CDMX; si no hay commits nuevos no hace nada
   workflow_dispatch:
 
 permissions:
@@ -31,7 +31,7 @@ jobs:
           pip install fonttools brotli
           python scripts/build.py
 
-      - name: Changelog semanal
+      - name: Bitácora
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,6 +42,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A assets README.md
+          git add -A assets README.md README.en.md
           git diff --cached --quiet || git commit -m "perfil: actualización automática"
           git push
