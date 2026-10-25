@@ -23,12 +23,12 @@
 <!-- changelog-en:start -->
 <img src="assets/bitacora-en.svg" alt="What I've been building. A model reads my public commits from the last 30 days and writes here what I built. Unedited." width="100%">
 
-- I renamed Chambeadores and added a live demo with its GIF in the README.
-- I built a nighttime isometric virtual office, with a whip to keep the team moving.
-- I configured the router to send easy tasks to Sonnet, cutting costs compared to Opus.
+- I built Chambeadores with CI on Linux, macOS, and Windows, plus a GitHub Pages demo.
+- I built the Claude Code router with savings measurement, sending easy tasks to Sonnet.
+- I built kit-saas-latam with Stripe and Mercado Pago payments, LFPDPPP 2025 privacy notice, and SaaS security.
 
-<sub>last 30 days · summarized by a model from 8 commits in 3 repos · last commit: 2026-10-25</sub>
-<!-- changelog:hash:2ad61da5b73f -->
+<sub>last 30 days · summarized by a model from 39 commits in 3 repos · last commit: 2026-10-25</sub>
+<!-- changelog:hash:d982874d10cf -->
 <!-- changelog-en:end -->
 
 <p align="center">
@@ -66,12 +66,12 @@
 <!-- changelog:start -->
 <img src="assets/bitacora.svg" alt="Lo último que construí. Un modelo lee mis commits públicos de los últimos 30 días y escribe aquí qué construí. Sin editar." width="100%">
 
-- Renombré Chambeadores y agregué una demo en línea con su GIF en el README.
-- Construí una oficina virtual isométrica nocturna, con un látigo para mover el ritmo del equipo.
-- Configuré el enrutador para mandar tareas sencillas a Sonnet, bajando costos frente a Opus.
+- Construí Chambeadores con CI en Linux, macOS y Windows, y una demo en GitHub Pages.
+- Armé el enrutador de Claude Code con medición de ahorro, mandando tareas fáciles a Sonnet.
+- Armé kit-saas-latam con pagos Stripe y Mercado Pago, aviso de privacidad LFPDPPP 2025 y seguridad SaaS.
 
-<sub>últimos 30 días · resumido por un modelo a partir de 8 commits en 3 repos · último commit: 2026-10-25</sub>
-<!-- changelog:hash:2ad61da5b73f -->
+<sub>últimos 30 días · resumido por un modelo a partir de 39 commits en 3 repos · último commit: 2026-10-25</sub>
+<!-- changelog:hash:d982874d10cf -->
 <!-- changelog:end -->
 
 <p align="center">
