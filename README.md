@@ -19,6 +19,14 @@
 <img src="assets/stack.svg" alt="modelos: Claude API, LLMs locales con Ollama, embeddings; orquestación: agentes y subagentes, tool use, RAG con pgvector, n8n; producto: React, TypeScript, Vite, Supabase, Vercel, Capacitor; backend: Java 17, Spring Boot, PostgreSQL, Node" width="100%">
 
 <!-- changelog:start -->
+<img src="assets/bitacora.svg" alt="Lo último que construí. Un modelo lee mis commits públicos de los últimos 30 días y escribe aquí qué construí. Sin editar." width="100%">
+
+- Renombré Chambeadores y publiqué su demo en GitHub Pages, con GIF en el README.
+- Construí una oficina virtual isométrica de noche, con caseta y ambiente nocturno.
+- Ajusté el enrutador para mandar tareas fáciles a Sonnet en vez de Opus.
+
+<sub>últimos 30 días · resumido por un modelo a partir de 3 commits en 2 repos · último commit: 2026-10-25</sub>
+<!-- changelog:hash:b87d7eb89f51 -->
 <!-- changelog:end -->
 
 <p align="center">
