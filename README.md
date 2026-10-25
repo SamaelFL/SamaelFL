@@ -13,7 +13,7 @@
 
 <p align="center">
 <a href="https://github.com/SamaelFL/Chambeadores"><img src="assets/producto-3.svg" alt="Chambeadores: Oficina virtual con látigo: cada latigazo reparte el trabajo largo entre peones (subagentes). Con sonido." width="49%"></a>
-<a href="https://github.com/SamaelFL"><img src="assets/producto-4.svg" alt="Kit SaaS LATAM: Skills para agentes con lo que nadie te explica en México: LFPDPPP, CFDI, MercadoPago, RLS y seguridad." width="49%"></a>
+<a href="https://github.com/SamaelFL/kit-saas-latam"><img src="assets/producto-4.svg" alt="Kit SaaS LATAM: Skills para agentes con lo que nadie te explica en México: LFPDPPP, CFDI, MercadoPago, RLS y seguridad." width="49%"></a>
 </p>
 
 <img src="assets/stack.svg" alt="modelos: Claude API, LLMs locales con Ollama, embeddings; orquestación: agentes y subagentes, tool use, RAG con pgvector, n8n; producto: React, TypeScript, Vite, Supabase, Vercel, Capacitor; backend: Java 17, Spring Boot, PostgreSQL, Node" width="100%">

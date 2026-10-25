@@ -13,7 +13,7 @@
 
 <p align="center">
 <a href="https://github.com/SamaelFL/Chambeadores"><img src="assets/producto-3-en.svg" alt="Chambeadores: Virtual office with a whip: each crack splits long tasks among workers (subagents). With sound." width="49%"></a>
-<a href="https://github.com/SamaelFL"><img src="assets/producto-4-en.svg" alt="Kit SaaS LATAM: Agent skills for what nobody explains in Mexico: privacy law, CFDI, MercadoPago, RLS and security." width="49%"></a>
+<a href="https://github.com/SamaelFL/kit-saas-latam"><img src="assets/producto-4-en.svg" alt="Kit SaaS LATAM: Agent skills for what nobody explains in Mexico: privacy law, CFDI, MercadoPago, RLS and security." width="49%"></a>
 </p>
 
 <img src="assets/stack-en.svg" alt="models: Claude API, local LLMs with Ollama, embeddings; orchestration: agents and subagents, tool use, RAG with pgvector, n8n; product: React, TypeScript, Vite, Supabase, Vercel, Capacitor; backend: Java 17, Spring Boot, PostgreSQL, Node" width="100%">

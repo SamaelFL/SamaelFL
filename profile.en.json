@@ -133,11 +133,11 @@
     },
     {
       "name": "Kit SaaS LATAM",
-      "status": "soon",
+      "status": "open",
       "object": "toolbox",
       "desc": "Agent skills for what nobody explains in Mexico: privacy law, CFDI, MercadoPago, RLS and security.",
-      "label": "Open source",
-      "url": "https://github.com/SamaelFL"
+      "label": "github.com/SamaelFL/kit-saas-latam",
+      "url": "https://github.com/SamaelFL/kit-saas-latam"
     }
   ],
   "stack_title": "What I build with",

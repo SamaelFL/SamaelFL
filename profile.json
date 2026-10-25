@@ -133,11 +133,11 @@
     },
     {
       "name": "Kit SaaS LATAM",
-      "status": "soon",
+      "status": "open",
       "object": "toolbox",
       "desc": "Skills para agentes con lo que nadie te explica en México: LFPDPPP, CFDI, MercadoPago, RLS y seguridad.",
-      "label": "Código abierto",
-      "url": "https://github.com/SamaelFL"
+      "label": "github.com/SamaelFL/kit-saas-latam",
+      "url": "https://github.com/SamaelFL/kit-saas-latam"
     }
   ],
   "stack_title": "Con qué construyo",
@@ -203,7 +203,8 @@
   "footer": "Cada imagen de este perfil sale de código: <code>scripts/build.py</code> dibuja la oficina caja por caja.",
   "changelog_repos": [
     "SamaelFL/Chambeadores",
-    "SamaelFL/enrutador"
+    "SamaelFL/enrutador",
+    "SamaelFL/kit-saas-latam"
   ],
   "ui": {
     "status": {
