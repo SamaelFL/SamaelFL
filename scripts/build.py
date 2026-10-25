@@ -479,9 +479,8 @@ def contact(c):
 
 # ---------------------------------------------------------------- README
 
-# Un solo README: el español a la vista y el inglés en un desplegable arriba, para
-# que quien lo abra no salga del perfil. GitHub no permite JavaScript ni CSS, así
-# que un switch que reemplace el contenido no es posible.
+# Un solo README con los dos idiomas en desplegables, para que quien cambie de idioma
+# no salga del perfil. GitHub no permite JavaScript ni CSS.
 LANGS = {
     "es": {"profile": "profile.json", "suffix": "", "marker": "changelog"},
     "en": {"profile": "profile.en.json", "suffix": "-en", "marker": "changelog-en"},
@@ -564,9 +563,11 @@ def main():
         bodies[lang] = body(p, cfg)
         labels[lang] = p["ui"].get("switch_label", "")
         report.append(f"{lang}: " + ", ".join(f"{n} {len(c) // 1024}KB" for n, c in out.items()))
+    # Dos desplegables con el mismo name: el navegador deja abierto solo uno, así que abrir
+    # el inglés esconde el español y viceversa. El español arranca abierto.
     readme = (
-        f"<details>\n<summary><b>{labels['en']}</b></summary>\n<br>\n\n{bodies['en']}\n</details>\n\n"
-        + bodies["es"]
+        f'<details name="idioma">\n<summary><b>{labels["en"]}</b></summary>\n<br>\n\n{bodies["en"]}\n</details>\n\n'
+        f'<details name="idioma" open>\n<summary><b>{labels["es"]}</b></summary>\n<br>\n\n{bodies["es"]}\n</details>\n'
     )
     (ROOT / "README.md").write_text(readme)
     print("listo:\n" + "\n".join(report))

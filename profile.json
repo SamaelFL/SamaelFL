@@ -8,12 +8,12 @@
     "Los agentes hacen",
     "el turno de noche."
   ],
-  "hero_role": "AI Engineer en Ciudad de México. Fundador de SAID Co., donde construyo productos con IA de principio a fin.",
+  "hero_role": "AI Engineer en CDMX. De día, backend y datos en un corporativo mexicano; de noche, SAID Co., donde construyo productos con IA de principio a fin.",
   "hero_caption": "Oficina virtual, turno de noche. El del casco blanco soy yo.",
   "hero_caption_right": "CDMX, 2:47 a. m.",
   "featured": {
     "name": "enrutador",
-    "badge": "Nuevo · código abierto · mod para Claude Code",
+    "badge": "Código abierto · mod para Claude Code",
     "headline": [
       "Mi plan de Claude se acababa a media semana.",
       "Ahora cierro la semana con ",
@@ -214,6 +214,7 @@
     },
     "log_badge": "automático · últimos 30 días",
     "hero_alt": "Ilustración: oficina virtual en isométrico con un capataz y cuatro peones.",
-    "featured_alt": "Diagrama: los pedidos pasan por el clasificador y llegan a Sonnet o a Opus."
+    "featured_alt": "Diagrama: los pedidos pasan por el clasificador y llegan a Sonnet o a Opus.",
+    "switch_label": "Español"
   }
 }

@@ -1,4 +1,4 @@
-<details>
+<details name="idioma">
 <summary><b>Read in English</b></summary>
 <br>
 
@@ -41,6 +41,10 @@
 
 </details>
 
+<details name="idioma" open>
+<summary><b>Español</b></summary>
+<br>
+
 <a href="https://github.com/SamaelFL"><img src="assets/hero.svg" alt="Ismael Florean. Diseño el sistema. Los agentes hacen el turno de noche. Ilustración: oficina virtual en isométrico con un capataz y cuatro peones." width="100%"></a>
 
 <a href="https://github.com/SamaelFL/enrutador"><img src="assets/destacado.svg" alt="enrutador: Mi plan de Claude se acababa a media semana. Ahora cierro la semana con 40% de sobra. Un mod de ~500 líneas que decide, pedido por pedido, si basta Sonnet o hace falta Opus. Haiku clasifica en ~1 s y, ante la duda, gana Opus. Diagrama: los pedidos pasan por el clasificador y llegan a Sonnet o a Opus." width="100%"></a>
@@ -77,3 +81,5 @@
 </p>
 
 <p align="center"><sub>Cada imagen de este perfil sale de código: <code>scripts/build.py</code> dibuja la oficina caja por caja.</sub></p>
+
+</details>
