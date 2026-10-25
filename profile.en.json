@@ -150,6 +150,22 @@
       "desc": "Agent skills for what nobody explains in Mexico: privacy law, CFDI, MercadoPago, RLS and security.",
       "label": "github.com/SamaelFL/kit-saas-latam",
       "url": "https://github.com/SamaelFL/kit-saas-latam"
+    },
+    {
+      "name": "acreditador",
+      "status": "open",
+      "object": "alcancia",
+      "desc": "Stripe and Mercado Pago webhooks in Spring Boot that credit exactly once, even when 50 copies arrive at once.",
+      "label": "github.com/SamaelFL/acreditador",
+      "url": "https://github.com/SamaelFL/acreditador"
+    },
+    {
+      "name": "enrutador",
+      "status": "open",
+      "object": "prensa",
+      "desc": "Claude Code mod: compacts long sessions and runs subagents on Sonnet. 32% cheaper, measured.",
+      "label": "github.com/SamaelFL/enrutador",
+      "url": "https://github.com/SamaelFL/enrutador"
     }
   ],
   "stack_title": "What I build with",

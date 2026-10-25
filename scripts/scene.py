@@ -417,6 +417,35 @@ def obj_toolbox(v):
     return items
 
 
+ALTO_FICHA = 1.5
+
+
+def obj_alcancia(v):
+    """La caja del acreditador: una ranura arriba y un foco verde al frente."""
+    items = []
+    plinth(items, 0, 0)
+    items.append(Box(-1.3, -1.0, 0.6, 2.6, 2.0, 1.8, "#2B3245", faces={"top": "#333C52"}))
+    items.append(Box(-1.32, -1.02, 2.2, 2.64, 2.04, 0.2, P["amber"]))
+    items.append(Box(-0.55, -0.09, 2.4, 1.1, 0.18, 0.02, "#0C0F16", faces={"top": "#0C0F16"}))
+    items.append(Box(0.6, 1.0, 1.15, 0.45, 0.08, 0.45, "#24402F"))
+    # Un punto invisible donde arranca la ficha, para que el encuadre la incluya.
+    items.append(Box(0, 0, 2.45 + ALTO_FICHA + 0.6, 0.001, 0.001, 0.001, "#232A3B"))
+    return items
+
+
+def obj_prensa(v):
+    """El enrutador: una pila de contexto que la prensa compacta."""
+    items = []
+    plinth(items, 0, 0)
+    items.append(Box(-1.2, -1.2, 0.6, 2.4, 2.4, 0.2, "#2B3245"))
+    for k in range(9):
+        items.append(Box(-1.0, -1.0, 0.8 + k * 0.2, 2.0, 2.0, 0.16, "#E9E4DA" if k % 2 else "#D3CCC0"))
+    tope = 0.8 + 9 * 0.2 + 0.02
+    items.append(Box(-1.3, -1.3, tope, 2.6, 2.6, 0.22, P["amber"]))
+    items.append(Box(-0.13, -0.13, tope + 0.22, 0.26, 0.26, 0.9, "#9AA3B3"))
+    return items
+
+
 # ---------------------------------------------------------------- animaciones de producto
 # SMIL dentro del SVG: GitHub lo reproduce porque la imagen se sirve tal cual (sin JavaScript).
 
@@ -497,12 +526,94 @@ def anim_toolbox(v, items, svg):
     return fijo + abre + "".join(cubos)
 
 
-ANIMADOS = {"dumbbell": anim_dumbbell, "cv": anim_cv, "toolbox": anim_toolbox}
+def anim_alcancia(v, items, svg):
+    """Tres copias del mismo pago caen a la ranura: entra una, las otras rebotan."""
+    fijo = render_scene(v, items[:4])
+    foco_apagado = render_scene(v, items[4:5])
+    foco = render_scene(v, [Box(0.6, 1.0, 1.15, 0.45, 0.08, 0.45, "#3FB950", faces={"top": "#7EE2A0"})])
+    t = 3.4
+    alto = ALTO_FICHA * v.s
+    entra = 0.3 * v.s
+    piezas = []
+    for i, ini in enumerate((0.04, 0.38, 0.62)):
+        ficha = render_scene(v, [Box(-0.3, -0.06, 2.45, 0.6, 0.12, 0.6, P["glow"], faces={"top": "#B4F2E8"})])
+        llega = ini + 0.18
+        if i == 0:
+            # La primera entra: baja hasta la ranura y se mete.
+            valores = f"0 {-alto:.1f};0 {-alto:.1f};0 0;0 {entra:.1f};0 {entra:.1f}"
+            tiempos = f"0;{ini:.2f};{llega:.2f};{llega + 0.06:.2f};1"
+            opacidad = f"0;0;1;1;0;0"
+            t_op = f"0;{ini:.2f};{ini + 0.04:.2f};{llega:.2f};{llega + 0.06:.2f};1"
+        else:
+            # Las copias llegan, rebotan en la ranura y se desvanecen.
+            rebote = -0.45 * v.s
+            valores = f"0 {-alto:.1f};0 {-alto:.1f};0 0;0 {rebote:.1f};0 {rebote:.1f}"
+            tiempos = f"0;{ini:.2f};{llega:.2f};{llega + 0.08:.2f};1"
+            opacidad = "0;0;1;1;0;0"
+            t_op = f"0;{ini:.2f};{ini + 0.04:.2f};{llega + 0.04:.2f};{llega + 0.12:.2f};1"
+        piezas.append(
+            f'<g opacity="0">{ficha}'
+            f'<animate attributeName="opacity" values="{opacidad}" keyTimes="{t_op}" dur="{t}s" repeatCount="indefinite"/>'
+            f'<animateTransform attributeName="transform" type="translate" values="{valores}" keyTimes="{tiempos}" '
+            f'calcMode="spline" keySplines="0 0 1 1;0.55 0 0.9 0.6;0.2 0.6 0.4 1;0 0 1 1" dur="{t}s" repeatCount="indefinite"/></g>'
+        )
+    prende = 0.04 + 0.18 + 0.05
+    luz = (
+        f'<g opacity="0">{foco}'
+        f'<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;{prende:.2f};{prende + 0.03:.2f};'
+        f'{prende + 0.3:.2f};{prende + 0.4:.2f};1" dur="{t}s" repeatCount="indefinite"/></g>'
+    )
+    return fijo + foco_apagado + luz + "".join(piezas)
+
+
+def anim_prensa(v, items, svg):
+    """La pila crece paso a paso; al pasar el tope, la prensa la compacta."""
+    t = 4.2
+    base = render_scene(v, items[:2])
+    capas = items[2:11]
+    prensa = render_scene(v, items[11:])
+    quedan = 3
+    baja = (9 - quedan) * 0.2 * v.s
+    salida = []
+    for k, capa in enumerate(capas):
+        dibujo = render_scene(v, [capa])
+        if k < quedan:
+            salida.append(dibujo)
+            continue
+        # De arriba hacia abajo se van al bajar la prensa; luego vuelven a crecer una por una.
+        orden = (8 - k) / (8 - quedan)
+        se_va = 0.12 + 0.3 * orden
+        vuelve = 0.6 + 0.3 * (k - quedan) / (8 - quedan)
+        salida.append(
+            f'<g>{dibujo}<animate attributeName="opacity" values="1;1;0;0;1;1" '
+            f'keyTimes="0;{se_va:.3f};{se_va + 0.03:.3f};{vuelve:.3f};{vuelve + 0.03:.3f};1" dur="{t}s" repeatCount="indefinite"/></g>'
+        )
+    golpe = (
+        f'<g>{prensa}<animateTransform attributeName="transform" type="translate" '
+        f'values="0 0;0 0;0 {baja:.1f};0 {baja:.1f};0 0;0 0" keyTimes="0;0.1;0.44;0.52;0.62;1" calcMode="spline" '
+        f'keySplines="0 0 1 1;0.5 0 0.8 0.6;0 0 1 1;{_ease(1)};0 0 1 1" dur="{t}s" repeatCount="indefinite"/></g>'
+    )
+    return base + "".join(salida) + golpe
+
+
+ANIMADOS = {
+    "dumbbell": anim_dumbbell,
+    "cv": anim_cv,
+    "toolbox": anim_toolbox,
+    "alcancia": anim_alcancia,
+    "prensa": anim_prensa,
+}
 
 
 def product_object(svg, kind, cx, cy, max_w, max_h, animar=False):
     from iso import _screen_box
-    fn = {"dumbbell": obj_dumbbell, "peon": obj_peon, "toolbox": obj_toolbox}
+    fn = {
+        "dumbbell": obj_dumbbell,
+        "peon": obj_peon,
+        "toolbox": obj_toolbox,
+        "alcancia": obj_alcancia,
+        "prensa": obj_prensa,
+    }
 
     def build(v):
         return obj_cv(v, svg) if kind == "cv" else fn[kind](v)

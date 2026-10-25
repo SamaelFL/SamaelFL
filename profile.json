@@ -150,6 +150,22 @@
       "desc": "Skills para agentes con lo que nadie te explica en México: LFPDPPP, CFDI, MercadoPago, RLS y seguridad.",
       "label": "github.com/SamaelFL/kit-saas-latam",
       "url": "https://github.com/SamaelFL/kit-saas-latam"
+    },
+    {
+      "name": "acreditador",
+      "status": "open",
+      "object": "alcancia",
+      "desc": "Webhooks de Stripe y Mercado Pago en Spring Boot que acreditan una sola vez, aunque lleguen 50 copias juntas.",
+      "label": "github.com/SamaelFL/acreditador",
+      "url": "https://github.com/SamaelFL/acreditador"
+    },
+    {
+      "name": "enrutador",
+      "status": "open",
+      "object": "prensa",
+      "desc": "Mod para Claude Code: compacta las sesiones largas y corre los subagentes en Sonnet. 32% menos, medido.",
+      "label": "github.com/SamaelFL/enrutador",
+      "url": "https://github.com/SamaelFL/enrutador"
     }
   ],
   "stack_title": "Con qué construyo",
