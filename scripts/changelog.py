@@ -184,7 +184,8 @@ def main():
         print(f"sin commits en {DAYS} días; la bitácora se oculta")
         return
 
-    digest = hashlib.sha1("\n".join(sorted(c["sha"] for c in commits)).encode()).hexdigest()[:12]
+    # El prompt entra al hash: si cambian las instrucciones, la bitácora se vuelve a escribir.
+    digest = hashlib.sha1((SYSTEM + "\n".join(sorted(c["sha"] for c in commits))).encode()).hexdigest()[:12]
     if digest == current_hash():
         print("los commits no cambiaron; no hay nada que actualizar")
         return
