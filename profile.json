@@ -11,6 +11,54 @@
   "hero_role": "AI Engineer en Ciudad de México. Fundador de SAID Co., donde construyo productos con IA de principio a fin.",
   "hero_caption": "Oficina virtual, turno de noche. El del casco blanco soy yo.",
   "hero_caption_right": "CDMX, 2:47 a. m.",
+  "featured": {
+    "name": "enrutador",
+    "badge": "Nuevo · código abierto · mod para Claude Code",
+    "headline": [
+      "Mi plan de IA duraba 4 o 5 días.",
+      "Ahora cierro la semana usando ",
+      "60%",
+      "."
+    ],
+    "desc": "Manda los pedidos fáciles a Sonnet y deja lo difícil en Opus. Haiku clasifica cada pedido en ~1 s y, ante la duda, gana Opus.",
+    "requests": [
+      [
+        "renombra esta variable",
+        "sonnet"
+      ],
+      [
+        "¿qué hace este regex?",
+        "sonnet"
+      ],
+      [
+        "no funciona el login",
+        "opus"
+      ],
+      [
+        "diseña la migración",
+        "opus"
+      ]
+    ],
+    "classifier": [
+      "Haiku",
+      "clasifica · ~1 s"
+    ],
+    "lanes": {
+      "sonnet": [
+        "Sonnet",
+        "trivial y simple",
+        "low · medium"
+      ],
+      "opus": [
+        "Opus",
+        "delicado o con duda",
+        "medium · high"
+      ]
+    },
+    "status": "Línea de estado: Sonnet · medium · simple (clasificador)",
+    "label": "github.com/SamaelFL/enrutador",
+    "url": "https://github.com/SamaelFL/enrutador"
+  },
   "statement": [
     "La parte difícil no es el modelo.",
     "Es que funcione un martes a las 3 a. m."
@@ -125,6 +173,7 @@
   ],
   "footer": "Cada imagen de este perfil sale de código: <code>scripts/build.py</code> dibuja la oficina caja por caja.",
   "changelog_repos": [
-    "SamaelFL/Chambeadores"
+    "SamaelFL/Chambeadores",
+    "SamaelFL/enrutador"
   ]
 }

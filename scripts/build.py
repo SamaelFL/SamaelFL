@@ -202,6 +202,113 @@ def manifesto(p):
     return svg.render()
 
 
+def featured(f):
+    """Placa destacada: un proyecto con su resultado y un diagrama que se mueve."""
+    H = 472
+    svg = Svg(W, H, f["name"])
+    plate(svg)
+    svg.add(
+        '<defs><radialGradient id="halo2" cx="0.82" cy="0.66" r="0.55">'
+        '<stop offset="0" stop-color="#18213A"/><stop offset="1" stop-color="#0C0F16" stop-opacity="0"/></radialGradient></defs>',
+        f'<rect width="{W}" height="{H}" fill="url(#halo2)" clip-path="url(#plate)"/>',
+    )
+
+    # etiqueta
+    color = C["apoyo"]
+    svg.add(
+        f'<circle cx="52" cy="36" r="3.5" fill="{color}"/><circle cx="52" cy="36" r="3.5" fill="none" stroke="{color}">'
+        '<animate attributeName="r" values="3.5;9" dur="2.2s" repeatCount="indefinite"/>'
+        '<animate attributeName="opacity" values="0.8;0" dur="2.2s" repeatCount="indefinite"/></circle>'
+    )
+    svg.add(svg.text(64, 40, f["badge"], "gm5", 11, color))
+    svg.add(svg.text(W - 48, 40, f"Fig. 2 · {f['name']}", "gm4", 11, C["texto2"], anchor="end"))
+
+    # titular: la segunda línea pinta el número con el acento
+    l1, pre, num, post = f["headline"]
+    size, sp = 32, -0.6
+    svg.add(svg.text(48, 104, l1, "as6", size, C["texto2"], spacing=sp))
+    x = 48
+    for part, col in ((pre, C["texto"]), (num, C["acento"]), (post, C["texto"])):
+        svg.add(svg.text(x, 148, part, "as6", size, col, spacing=sp))
+        x += text_width(part, "as6", size, sp)
+    for j, line in enumerate(wrap(f["desc"], "gs4", 15, 560)):
+        svg.add(svg.text(48, 188 + j * 23, line, "gs4", 15, C["texto2"]))
+
+    svg.add(f'<line x1="48" y1="246" x2="{W - 48}" y2="246" stroke="{C["regla"]}"/>')
+
+    # diagrama: pedidos → clasificador → carriles
+    lane_y = {"sonnet": 296, "opus": 378}
+    lane_c = {"sonnet": C["apoyo"], "opus": C["acento"]}
+    nx0, nx1, ny = 368, 516, 337
+    lx = 640
+    chip_h, gap, y0 = 28, 38, 270
+    dots = []
+    for i, (req, lane) in enumerate(f["requests"]):
+        cy = y0 + i * gap + chip_h / 2
+        tw = text_width(req, "gm4", 12)
+        cw = tw + 26
+        svg.add(
+            f'<rect x="48" y="{cy - chip_h / 2:.1f}" width="{cw:.1f}" height="{chip_h}" rx="8" '
+            f'fill="{C["superficie"]}" stroke="{C["borde"]}"/>'
+        )
+        svg.add(svg.text(61, cy + 4.3, req, "gm4", 12, C["texto"]))
+        x0 = 48 + cw
+        mid = (x0 + nx0) / 2
+        svg.add(
+            f'<path d="M{x0:.1f} {cy:.1f} C{mid:.1f} {cy:.1f} {mid:.1f} {ny} {nx0} {ny}" fill="none" stroke="{C["regla"]}" stroke-width="1.3"/>'
+        )
+        ty = lane_y[lane]
+        m2 = (nx1 + lx) / 2
+        path = f"M{x0:.1f} {cy:.1f} C{mid:.1f} {cy:.1f} {mid:.1f} {ny} {nx0} {ny} L{nx1} {ny} C{m2:.1f} {ny} {m2:.1f} {ty} {lx} {ty}"
+        dots.append((path, lane_c[lane], i))
+
+    for lane, ty in lane_y.items():
+        m2 = (nx1 + lx) / 2
+        svg.add(
+            f'<path d="M{nx1} {ny} C{m2:.1f} {ny} {m2:.1f} {ty} {lx} {ty}" fill="none" stroke="{lane_c[lane]}" '
+            'stroke-width="1.4" stroke-opacity="0.55"/>'
+        )
+
+    # puntos que viajan: cada pedido llega a su carril
+    for path, col, i in dots:
+        svg.add(
+            f'<circle r="3.4" fill="{col}" opacity="0"><animateMotion dur="3.6s" begin="{i * 0.9:.1f}s" '
+            f'repeatCount="indefinite" path="{path}"/>'
+            f'<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.9;1" dur="3.6s" '
+            f'begin="{i * 0.9:.1f}s" repeatCount="indefinite"/></circle>'
+        )
+
+    # clasificador
+    name, sub = f["classifier"]
+    svg.add(
+        f'<rect x="{nx0}" y="{ny - 30}" width="{nx1 - nx0}" height="60" rx="12" fill="{C["superficie"]}" stroke="{C["regla"]}"/>'
+    )
+    cx = (nx0 + nx1) / 2
+    svg.add(svg.text(cx, ny - 3, name, "gs5", 16, C["texto"], anchor="middle"))
+    svg.add(svg.text(cx, ny + 17, sub, "gm4", 11, C["texto2"], anchor="middle"))
+
+    # carriles
+    for lane, ty in lane_y.items():
+        title, note, effort = f["lanes"][lane]
+        col = lane_c[lane]
+        svg.add(
+            f'<rect x="{lx}" y="{ty - 30}" width="{W - 48 - lx}" height="60" rx="12" fill="{C["superficie"]}" stroke="{C["borde"]}"/>',
+            f'<rect x="{lx}" y="{ty - 18}" width="3" height="36" rx="1.5" fill="{col}"/>',
+        )
+        svg.add(svg.text(lx + 18, ty - 2, title, "as6", 18, C["texto"], spacing=-0.2))
+        svg.add(svg.text(lx + 18, ty + 17, note, "gm4", 11, C["texto2"]))
+        svg.add(svg.text(W - 64, ty - 2, effort, "gm4", 11, col, anchor="end"))
+
+    # pie
+    svg.add(f'<line x1="48" y1="{H - 50}" x2="{W - 48}" y2="{H - 50}" stroke="{C["regla"]}"/>')
+    svg.add(f'<rect x="48" y="{H - 30}" width="7" height="7" rx="1.5" fill="{C["acento"]}"/>')
+    svg.add(svg.text(63, H - 23, f["status"], "gm4", 11, C["texto2"]))
+    svg.add(svg.text(W - 72, H - 23, f["label"], "gm4", 12, C["texto"], anchor="end"))
+    svg.add(arrow(W - 56, H - 27, C["acento"], 5))
+    plate_end(svg)
+    return svg.render()
+
+
 def product(d, i):
     w, h = 432, 336
     svg = Svg(w, h, d["name"])
@@ -306,9 +413,17 @@ def readme(p):
     hero_alt = f"{p['name']}. {' '.join(p['hero_lines'])} Ilustración: oficina virtual en isométrico con un capataz y cuatro peones."
     facts = " ".join(f"{n}: {l}" for n, l in p["facts"])
     stack_alt = "; ".join(f"{g}: {', '.join(i)}" for g, i in p["stack"])
+    feat = ""
+    if "featured" in p:
+        f = p["featured"]
+        feat_alt = (
+            f"{f['name']}: {f['headline'][0]} {''.join(f['headline'][1:])} {f['desc']} "
+            "Diagrama: los pedidos pasan por el clasificador y llegan a Sonnet o a Opus."
+        )
+        feat = f'<a href="{f["url"]}">{img("destacado", feat_alt)}</a>\n\n'
     return f"""<a href="https://github.com/{p['user']}">{img('hero', hero_alt)}</a>
 
-{img('manifiesto', ' '.join(p['statement']) + ' ' + facts)}
+{feat}{img('manifiesto', ' '.join(p['statement']) + ' ' + facts)}
 
 {rows}
 
@@ -334,6 +449,8 @@ def main():
     for old in ASSETS.glob("*.svg"):
         old.unlink()
     out = {"hero": hero(p), "manifiesto": manifesto(p), "stack": stack(p), "bitacora": log_header(p)}
+    if "featured" in p:
+        out["destacado"] = featured(p["featured"])
     for i, d in enumerate(p["deployments"]):
         out[f"producto-{i + 1}"] = product(d, i)
     for i, c in enumerate(p["contact"]):
