@@ -4,7 +4,7 @@
 
 <a href="https://github.com/SamaelFL"><img src="assets/hero-en.svg" alt="Ismael Florean. I design the system. The agents work the night shift. Illustration: isometric virtual office with a foreman and four workers." width="100%"></a>
 
-<a href="https://github.com/SamaelFL/enrutador"><img src="assets/destacado-en.svg" alt="enrutador: My Claude plan ran out by midweek. Now I end the week with 40% to spare. A ~500-line mod that decides, request by request, whether Sonnet is enough or Opus is needed. Haiku classifies in ~1 s and, when in doubt, Opus wins. Diagram: requests go through the classifier and land on Sonnet or Opus." width="100%"></a>
+<a href="https://github.com/SamaelFL/enrutador"><img src="assets/destacado-en.svg" alt="enrutador: I measured it on 275 turns of my history. With v2 I spend 32% less. It compacts the session when the context passes 200k and runs subagents on Sonnet. v1 only switched models and saved 0%: the measuring tool ships in the repo. Diagram: when each turn ends the router compacts if the context passes 200k and sends subagents to Sonnet; the rest stays as is." width="100%"></a>
 
 <img src="assets/manifiesto-en.svg" alt="The hard part isn't the model. It's making it work on a Tuesday at 3 a.m. 2: AI products in production, with users and paid plans. 30+: custom skills that teach my agents how I work. 2023: the year I wrote my first line of code. Before that, sales and operations." width="100%">
 
@@ -47,7 +47,7 @@
 
 <a href="https://github.com/SamaelFL"><img src="assets/hero.svg" alt="Ismael Florean. Diseño el sistema. Los agentes hacen el turno de noche. Ilustración: oficina virtual en isométrico con un capataz y cuatro peones." width="100%"></a>
 
-<a href="https://github.com/SamaelFL/enrutador"><img src="assets/destacado.svg" alt="enrutador: Mi plan de Claude se acababa a media semana. Ahora cierro la semana con 40% de sobra. Un mod de ~500 líneas que decide, pedido por pedido, si basta Sonnet o hace falta Opus. Haiku clasifica en ~1 s y, ante la duda, gana Opus. Diagrama: los pedidos pasan por el clasificador y llegan a Sonnet o a Opus." width="100%"></a>
+<a href="https://github.com/SamaelFL/enrutador"><img src="assets/destacado.svg" alt="enrutador: Lo medí con 275 turnos de mi historial. Con la v2 gasto 32% menos. Compacta la sesión cuando el contexto pasa de 200k y corre los subagentes en Sonnet. La v1 solo cambiaba de modelo y ahorraba 0%: el medidor viene en el repo. Diagrama: al cerrar cada turno el enrutador compacta si el contexto pasa de 200k y manda los subagentes a Sonnet; lo demás sigue igual." width="100%"></a>
 
 <img src="assets/manifiesto.svg" alt="La parte difícil no es el modelo. Es que funcione un martes a las 3 a. m. 2: productos con IA en producción, con usuarios y planes de pago. 30+: skills propias que les enseñan a mis agentes cómo trabajo. 2023: el año de mi primera línea de código. Antes, ventas y operaciones." width="100%">
 
