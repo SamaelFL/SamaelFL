@@ -216,7 +216,8 @@
   "changelog_repos": [
     "SamaelFL/Chambeadores",
     "SamaelFL/enrutador",
-    "SamaelFL/kit-saas-latam"
+    "SamaelFL/kit-saas-latam",
+    "SamaelFL/acreditador"
   ],
   "ui": {
     "status": {
