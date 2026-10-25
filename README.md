@@ -18,6 +18,11 @@
 <a href="https://github.com/SamaelFL/kit-saas-latam"><img src="assets/producto-4-en.svg" alt="Kit SaaS LATAM: Agent skills for what nobody explains in Mexico: privacy law, CFDI, MercadoPago, RLS and security." width="49%"></a>
 </p>
 
+<p align="center">
+<a href="https://github.com/SamaelFL/acreditador"><img src="assets/producto-5-en.svg" alt="acreditador: Stripe and Mercado Pago webhooks in Spring Boot that credit exactly once, even when 50 copies arrive at once." width="49%"></a>
+<a href="https://github.com/SamaelFL/enrutador"><img src="assets/producto-6-en.svg" alt="enrutador: Claude Code mod: compacts long sessions and runs subagents on Sonnet. 32% cheaper, measured." width="49%"></a>
+</p>
+
 <img src="assets/stack-en.svg" alt="models: Claude API, local LLMs with Ollama, embeddings; orchestration: agents and subagents, tool use, RAG with pgvector, n8n; product: React, TypeScript, Vite, Supabase, Vercel, Capacitor; backend: Java 17, Spring Boot, PostgreSQL, Node" width="100%">
 
 <!-- changelog-en:start -->
@@ -59,6 +64,11 @@
 <p align="center">
 <a href="https://github.com/SamaelFL/Chambeadores"><img src="assets/producto-3.svg" alt="Chambeadores: Oficina virtual con látigo: cada latigazo reparte el trabajo largo entre peones (subagentes). Con sonido." width="49%"></a>
 <a href="https://github.com/SamaelFL/kit-saas-latam"><img src="assets/producto-4.svg" alt="Kit SaaS LATAM: Skills para agentes con lo que nadie te explica en México: LFPDPPP, CFDI, MercadoPago, RLS y seguridad." width="49%"></a>
+</p>
+
+<p align="center">
+<a href="https://github.com/SamaelFL/acreditador"><img src="assets/producto-5.svg" alt="acreditador: Webhooks de Stripe y Mercado Pago en Spring Boot que acreditan una sola vez, aunque lleguen 50 copias juntas." width="49%"></a>
+<a href="https://github.com/SamaelFL/enrutador"><img src="assets/producto-6.svg" alt="enrutador: Mod para Claude Code: compacta las sesiones largas y corre los subagentes en Sonnet. 32% menos, medido." width="49%"></a>
 </p>
 
 <img src="assets/stack.svg" alt="modelos: Claude API, LLMs locales con Ollama, embeddings; orquestación: agentes y subagentes, tool use, RAG con pgvector, n8n; producto: React, TypeScript, Vite, Supabase, Vercel, Capacitor; backend: Java 17, Spring Boot, PostgreSQL, Node" width="100%">
