@@ -203,13 +203,17 @@ def manifesto(p):
 
 
 def featured(f):
-    """Placa destacada: un proyecto con su resultado y un diagrama que se mueve."""
-    H = 472
+    """Placa destacada: el resultado en grande, la semana animada y el diagrama de ruteo."""
+    H = 664
     svg = Svg(W, H, f["name"])
     plate(svg)
+    rojo = "#F85149"
     svg.add(
-        '<defs><radialGradient id="halo2" cx="0.82" cy="0.66" r="0.55">'
-        '<stop offset="0" stop-color="#18213A"/><stop offset="1" stop-color="#0C0F16" stop-opacity="0"/></radialGradient></defs>',
+        '<defs><radialGradient id="halo2" cx="0.8" cy="0.35" r="0.6">'
+        '<stop offset="0" stop-color="#18213A"/><stop offset="1" stop-color="#0C0F16" stop-opacity="0"/></radialGradient>'
+        '<filter id="brillo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>'
+        f'<pattern id="rayas" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">'
+        f'<rect width="3" height="8" fill="#F85149" fill-opacity="0.22"/></pattern></defs>',
         f'<rect width="{W}" height="{H}" fill="url(#halo2)" clip-path="url(#plate)"/>',
     )
 
@@ -223,36 +227,105 @@ def featured(f):
     svg.add(svg.text(64, 40, f["badge"], "gm5", 11, color))
     svg.add(svg.text(W - 48, 40, f"Fig. 2 · {f['name']}", "gm4", 11, C["texto2"], anchor="end"))
 
-    # titular: la segunda línea pinta el número con el acento
+    # titular
     l1, pre, num, post = f["headline"]
     size, sp = 32, -0.6
-    svg.add(svg.text(48, 104, l1, "as6", size, C["texto2"], spacing=sp))
+    svg.add(svg.text(48, 102, l1, "as6", size, C["texto2"], spacing=sp))
     x = 48
     for part, col in ((pre, C["texto"]), (num, C["acento"]), (post, C["texto"])):
-        svg.add(svg.text(x, 148, part, "as6", size, col, spacing=sp))
-        x += text_width(part, "as6", size, sp)
-    for j, line in enumerate(wrap(f["desc"], "gs4", 15, 560)):
-        svg.add(svg.text(48, 188 + j * 23, line, "gs4", 15, C["texto2"]))
+        lead = len(part) - len(part.lstrip(" "))
+        x += text_width(" " * lead, "as6", size, sp)
+        svg.add(svg.text(x, 146, part.strip(" "), "as6", size, col, spacing=sp))
+        x += text_width(part.lstrip(" "), "as6", size, sp)
+    for j, line in enumerate(wrap(f["desc"], "gs4", 15, 640)):
+        svg.add(svg.text(48, 184 + j * 23, line, "gs4", 15, C["texto2"]))
 
-    svg.add(f'<line x1="48" y1="246" x2="{W - 48}" y2="246" stroke="{C["regla"]}"/>')
+    # ---- la semana: dos medidores que corren al mismo reloj
+    T = 8.0            # duración del ciclo
+    run = 6.3          # lo que tarda la semana en correr
+    day = run / 7
+    kt = lambda t: f"{t / T:.4f}"
+    top = 238
+    svg.add(f'<line x1="48" y1="{top}" x2="{W - 48}" y2="{top}" stroke="{C["regla"]}"/>')
+    svg.add(svg.text(48, top + 34, f["week_title"], "gs5", 15, C["texto"]))
+    svg.add(svg.text(48, top + 54, f["week_note"], "gm4", 11, C["texto2"]))
 
-    # diagrama: pedidos → clasificador → carriles
-    lane_y = {"sonnet": 296, "opus": 378}
+    tx0, tx1 = 236, W - 48
+    cw = (tx1 - tx0) / 7
+    # días
+    for i, d in enumerate(f["days"]):
+        cx = tx0 + cw * i + cw / 2
+        svg.add(svg.text(cx, top + 40, d, "gm5", 12, C["texto2"], anchor="middle"))
+    hl_vals = ";".join(f"{tx0 + cw * min(i, 6) + 6:.1f}" for i in range(8))
+    hl_keys = ";".join(kt(min(i * day, run)) for i in range(7)) + ";1"
+    svg.add(
+        f'<rect y="{top + 22}" width="{cw - 12:.1f}" height="26" rx="7" fill="none" stroke="{C["acento"]}" stroke-opacity="0.8">'
+        f'<animate attributeName="x" values="{hl_vals}" keyTimes="{hl_keys}" calcMode="discrete" dur="{T}s" repeatCount="indefinite"/></rect>'
+    )
+
+    rows = [
+        (f["rows"][0], top + 92, rojo, 1.0, 4.5),
+        (f["rows"][1], top + 150, C["apoyo"], 0.6, 7.0),
+    ]
+    for (label, sub, end_text), ry, col, frac, days_to in rows:
+        svg.add(svg.text(48, ry + 4, label, "gs5", 14, C["texto"]))
+        svg.add(svg.text(48, ry + 22, sub, "gm4", 11, C["texto2"]))
+        svg.add(f'<rect x="{tx0}" y="{ry - 8}" width="{tx1 - tx0}" height="16" rx="8" fill="{C["superficie"]}" stroke="{C["borde"]}"/>')
+        full = (tx1 - tx0) * frac
+        t_end = days_to * day
+        svg.add(
+            f'<rect x="{tx0}" y="{ry - 8}" height="16" rx="8" fill="{col}" width="0">'
+            f'<animate attributeName="width" values="0;{full:.1f};{full:.1f};0" keyTimes="0;{kt(t_end)};{kt(T - 0.25)};1" '
+            f'dur="{T}s" repeatCount="indefinite"/></rect>'
+        )
+        if frac >= 1:
+            # el plan se acaba: el resto de la semana queda bloqueado
+            lock_x = tx0 + cw * days_to
+            svg.add(
+                f'<rect x="{lock_x:.1f}" y="{top + 20}" width="{tx1 - lock_x:.1f}" height="30" rx="8" fill="url(#rayas)" '
+                f'stroke="{rojo}" stroke-opacity="0.5" opacity="0">'
+                f'<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;{kt(t_end)};{kt(t_end + 0.15)};{kt(T - 0.25)};1" '
+                f'dur="{T}s" repeatCount="indefinite"/></rect>'
+            )
+            svg.add(
+                f'<g opacity="0"><animate attributeName="opacity" values="0;0;1;0.35;1;0.35;1;1;0" '
+                f'keyTimes="0;{kt(t_end)};{kt(t_end + 0.1)};{kt(t_end + 0.4)};{kt(t_end + 0.7)};{kt(t_end + 1.0)};{kt(t_end + 1.3)};{kt(T - 0.25)};1" '
+                f'dur="{T}s" repeatCount="indefinite"/>'
+                + svg.text(tx1, ry - 16, end_text, "gm5", 11, rojo, anchor="end")
+                + "</g>"
+            )
+        else:
+            svg.add(
+                f'<g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" '
+                f'keyTimes="0;{kt(t_end - 0.1)};{kt(t_end + 0.2)};{kt(T - 0.25)};1" dur="{T}s" repeatCount="indefinite"/>'
+                + svg.text(tx1, ry - 16, end_text, "gm5", 11, col, anchor="end")
+                + "</g>"
+            )
+
+    # ---- el ruteo: cada pedido viaja a su carril
+    dtop = top + 196
+    svg.add(f'<line x1="48" y1="{dtop}" x2="{W - 48}" y2="{dtop}" stroke="{C["regla"]}"/>')
+    lane_y = {"sonnet": dtop + 52, "opus": dtop + 128}
     lane_c = {"sonnet": C["apoyo"], "opus": C["acento"]}
-    nx0, nx1, ny = 368, 516, 337
+    nx0, nx1, ny = 368, 516, dtop + 90
     lx = 640
-    chip_h, gap, y0 = 28, 38, 270
-    dots = []
+    chip_h, gap, y0 = 28, 38, dtop + 20
+    D = 3.6
+    paths = []
     for i, (req, lane) in enumerate(f["requests"]):
         cy = y0 + i * gap + chip_h / 2
         tw = text_width(req, "gm4", 12)
-        cw = tw + 26
+        cwid = tw + 26
+        col = lane_c[lane]
+        b = i * D / 4
         svg.add(
-            f'<rect x="48" y="{cy - chip_h / 2:.1f}" width="{cw:.1f}" height="{chip_h}" rx="8" '
-            f'fill="{C["superficie"]}" stroke="{C["borde"]}"/>'
+            f'<rect x="48" y="{cy - chip_h / 2:.1f}" width="{cwid:.1f}" height="{chip_h}" rx="8" '
+            f'fill="{C["superficie"]}" stroke="{C["borde"]}"/>',
+            f'<rect x="48" y="{cy - chip_h / 2:.1f}" width="{cwid:.1f}" height="{chip_h}" rx="8" fill="none" stroke="{col}" opacity="0">'
+            f'<animate attributeName="opacity" values="0;1;0;0" keyTimes="0;0.05;0.3;1" dur="{D}s" begin="{b:.2f}s" repeatCount="indefinite"/></rect>',
         )
         svg.add(svg.text(61, cy + 4.3, req, "gm4", 12, C["texto"]))
-        x0 = 48 + cw
+        x0 = 48 + cwid
         mid = (x0 + nx0) / 2
         svg.add(
             f'<path d="M{x0:.1f} {cy:.1f} C{mid:.1f} {cy:.1f} {mid:.1f} {ny} {nx0} {ny}" fill="none" stroke="{C["regla"]}" stroke-width="1.3"/>'
@@ -260,22 +333,13 @@ def featured(f):
         ty = lane_y[lane]
         m2 = (nx1 + lx) / 2
         path = f"M{x0:.1f} {cy:.1f} C{mid:.1f} {cy:.1f} {mid:.1f} {ny} {nx0} {ny} L{nx1} {ny} C{m2:.1f} {ny} {m2:.1f} {ty} {lx} {ty}"
-        dots.append((path, lane_c[lane], i))
+        paths.append((path, col, b))
 
     for lane, ty in lane_y.items():
         m2 = (nx1 + lx) / 2
         svg.add(
             f'<path d="M{nx1} {ny} C{m2:.1f} {ny} {m2:.1f} {ty} {lx} {ty}" fill="none" stroke="{lane_c[lane]}" '
             'stroke-width="1.4" stroke-opacity="0.55"/>'
-        )
-
-    # puntos que viajan: cada pedido llega a su carril
-    for path, col, i in dots:
-        svg.add(
-            f'<circle r="3.4" fill="{col}" opacity="0"><animateMotion dur="3.6s" begin="{i * 0.9:.1f}s" '
-            f'repeatCount="indefinite" path="{path}"/>'
-            f'<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.9;1" dur="3.6s" '
-            f'begin="{i * 0.9:.1f}s" repeatCount="indefinite"/></circle>'
         )
 
     # clasificador
@@ -287,23 +351,51 @@ def featured(f):
     svg.add(svg.text(cx, ny - 3, name, "gs5", 16, C["texto"], anchor="middle"))
     svg.add(svg.text(cx, ny + 17, sub, "gm4", 11, C["texto2"], anchor="middle"))
 
-    # carriles
+    # carriles, con un destello cuando llega cada pedido
     for lane, ty in lane_y.items():
         title, note, effort = f["lanes"][lane]
         col = lane_c[lane]
+        llegadas = [b for (_, c, b) in paths if c == col]
         svg.add(
-            f'<rect x="{lx}" y="{ty - 30}" width="{W - 48 - lx}" height="60" rx="12" fill="{C["superficie"]}" stroke="{C["borde"]}"/>',
-            f'<rect x="{lx}" y="{ty - 18}" width="3" height="36" rx="1.5" fill="{col}"/>',
+            f'<rect x="{lx}" y="{ty - 30}" width="{W - 48 - lx}" height="60" rx="12" fill="{C["superficie"]}" stroke="{C["borde"]}"/>'
         )
+        for b in llegadas:
+            svg.add(
+                f'<rect x="{lx}" y="{ty - 30}" width="{W - 48 - lx}" height="60" rx="12" fill="{col}" fill-opacity="0.08" stroke="{col}" opacity="0">'
+                f'<animate attributeName="opacity" values="0;0;1;0" keyTimes="0;0.9;0.94;1" dur="{D}s" begin="{b:.2f}s" repeatCount="indefinite"/></rect>'
+            )
+        svg.add(f'<rect x="{lx}" y="{ty - 18}" width="3" height="36" rx="1.5" fill="{col}"/>')
         svg.add(svg.text(lx + 18, ty - 2, title, "as6", 18, C["texto"], spacing=-0.2))
         svg.add(svg.text(lx + 18, ty + 17, note, "gm4", 11, C["texto2"]))
         svg.add(svg.text(W - 64, ty - 2, effort, "gm4", 11, col, anchor="end"))
 
-    # pie
+    # puntos que viajan (encima de todo)
+    for path, col, b in paths:
+        for r, op, extra in ((8, 0.35, ' filter="url(#brillo)"'), (3.6, 1, "")):
+            svg.add(
+                f'<circle r="{r}" fill="{col}" opacity="0"{extra}><animateMotion dur="{D}s" begin="{b:.2f}s" '
+                f'repeatCount="indefinite" path="{path}"/>'
+                f'<animate attributeName="opacity" values="0;{op};{op};0" keyTimes="0;0.06;0.92;1" dur="{D}s" '
+                f'begin="{b:.2f}s" repeatCount="indefinite"/></circle>'
+            )
+
+    # pie: la línea de estado cambia con cada pedido
     svg.add(f'<line x1="48" y1="{H - 50}" x2="{W - 48}" y2="{H - 50}" stroke="{C["regla"]}"/>')
     svg.add(f'<rect x="48" y="{H - 30}" width="7" height="7" rx="1.5" fill="{C["acento"]}"/>')
-    svg.add(svg.text(63, H - 23, f["status"], "gm4", 11, C["texto2"]))
-    svg.add(svg.text(W - 72, H - 23, f["label"], "gm4", 12, C["texto"], anchor="end"))
+    n = len(f["statuses"])
+    for i, s in enumerate(f["statuses"]):
+        on = ["0"] * n
+        on[i] = "1"
+        vals = ";".join(on + [on[0]])
+        keys = ";".join(f"{k / n:.4f}" for k in range(n)) + ";1"
+        svg.add(
+            f'<g opacity="{on[0] if i == 0 else 0}"><animate attributeName="opacity" values="{vals}" keyTimes="{keys}" '
+            f'calcMode="discrete" dur="{D}s" begin="{D:.2f}s" repeatCount="indefinite"/>'
+            + svg.text(63, H - 23, s, "gm4", 11, C["texto2"])
+            + "</g>"
+        )
+    cta = f["cta"]
+    svg.add(svg.text(W - 72, H - 23, cta, "gm5", 12, C["texto"], anchor="end"))
     svg.add(arrow(W - 56, H - 27, C["acento"], 5))
     plate_end(svg)
     return svg.render()

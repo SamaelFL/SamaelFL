@@ -15,12 +15,12 @@
     "name": "enrutador",
     "badge": "Nuevo · código abierto · mod para Claude Code",
     "headline": [
-      "Mi plan de IA duraba 4 o 5 días.",
-      "Ahora cierro la semana usando ",
-      "60%",
-      "."
+      "Mi plan de Claude se acababa a media semana.",
+      "Ahora cierro la semana con ",
+      "40%",
+      " de sobra."
     ],
-    "desc": "Manda los pedidos fáciles a Sonnet y deja lo difícil en Opus. Haiku clasifica cada pedido en ~1 s y, ante la duda, gana Opus.",
+    "desc": "Un mod de ~500 líneas que decide, pedido por pedido, si basta Sonnet o hace falta Opus. Haiku clasifica en ~1 s y, ante la duda, gana Opus.",
     "requests": [
       [
         "renombra esta variable",
@@ -55,9 +55,38 @@
         "medium · high"
       ]
     },
-    "status": "Línea de estado: Sonnet · medium · simple (clasificador)",
     "label": "github.com/SamaelFL/enrutador",
-    "url": "https://github.com/SamaelFL/enrutador"
+    "url": "https://github.com/SamaelFL/enrutador",
+    "week_title": "Mi plan en una semana",
+    "week_note": "mi uso real, no un benchmark",
+    "days": [
+      "L",
+      "M",
+      "M",
+      "J",
+      "V",
+      "S",
+      "D"
+    ],
+    "rows": [
+      [
+        "Solo Opus",
+        "antes",
+        "límite alcanzado · sin Claude el resto de la semana"
+      ],
+      [
+        "Con enrutador",
+        "ahora",
+        "60% usado · 40% de sobra"
+      ]
+    ],
+    "statuses": [
+      "renombra esta variable  →  Sonnet · low · trivial",
+      "¿qué hace este regex?  →  Sonnet · low · trivial",
+      "no funciona el login  →  Opus · medium · media",
+      "diseña la migración  →  Opus · high · compleja"
+    ],
+    "cta": "Pruébalo gratis · github.com/SamaelFL/enrutador"
   },
   "statement": [
     "La parte difícil no es el modelo.",

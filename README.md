@@ -1,6 +1,6 @@
 <a href="https://github.com/SamaelFL"><img src="assets/hero.svg" alt="Ismael Florean. Diseño el sistema. Los agentes hacen el turno de noche. Ilustración: oficina virtual en isométrico con un capataz y cuatro peones." width="100%"></a>
 
-<a href="https://github.com/SamaelFL/enrutador"><img src="assets/destacado.svg" alt="enrutador: Mi plan de IA duraba 4 o 5 días. Ahora cierro la semana usando 60%. Manda los pedidos fáciles a Sonnet y deja lo difícil en Opus. Haiku clasifica cada pedido en ~1 s y, ante la duda, gana Opus. Diagrama: los pedidos pasan por el clasificador y llegan a Sonnet o a Opus." width="100%"></a>
+<a href="https://github.com/SamaelFL/enrutador"><img src="assets/destacado.svg" alt="enrutador: Mi plan de Claude se acababa a media semana. Ahora cierro la semana con 40% de sobra. Un mod de ~500 líneas que decide, pedido por pedido, si basta Sonnet o hace falta Opus. Haiku clasifica en ~1 s y, ante la duda, gana Opus. Diagrama: los pedidos pasan por el clasificador y llegan a Sonnet o a Opus." width="100%"></a>
 
 <img src="assets/manifiesto.svg" alt="La parte difícil no es el modelo. Es que funcione un martes a las 3 a. m. 2: productos con IA en producción, con usuarios y planes de pago. 30+: skills propias que les enseñan a mis agentes cómo trabajo. 2023: el año de mi primera línea de código. Antes, ventas y operaciones." width="100%">
 
