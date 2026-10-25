@@ -28,12 +28,12 @@
 <!-- changelog-en:start -->
 <img src="assets/bitacora-en.svg" alt="What I've been building. A model reads my public commits from the last 30 days and writes here what I built. Unedited." width="100%">
 
-- I built Chambeadores with CI on Linux, macOS, and Windows, plus a GitHub Pages demo.
-- I built the Claude Code router with savings measurement, sending easy tasks to Sonnet.
-- I built kit-saas-latam with Stripe and Mercado Pago payments, LFPDPPP 2025 privacy notice, and SaaS security.
+- I built Chambeadores, a virtual office with a published demo and automated tests on Linux, macOS, and Windows.
+- I built a Claude Code model router that sends easy tasks to Sonnet and measured its savings from my own history.
+- I documented a LATAM SaaS kit with Mexican compliance, security, signed-webhook payments, and Supabase RLS policies.
 
-<sub>last 30 days · summarized by a model from 39 commits in 3 repos · last commit: 2026-10-25</sub>
-<!-- changelog:hash:d982874d10cf -->
+<sub>last 30 days · summarized by a model from 44 commits in 4 repos · last commit: 2026-10-25</sub>
+<!-- changelog:hash:8189769eb5ec -->
 <!-- changelog-en:end -->
 
 <p align="center">
@@ -76,12 +76,12 @@
 <!-- changelog:start -->
 <img src="assets/bitacora.svg" alt="Lo último que construí. Un modelo lee mis commits públicos de los últimos 30 días y escribe aquí qué construí. Sin editar." width="100%">
 
-- Construí Chambeadores con CI en Linux, macOS y Windows, y una demo en GitHub Pages.
-- Armé el enrutador de Claude Code con medición de ahorro, mandando tareas fáciles a Sonnet.
-- Armé kit-saas-latam con pagos Stripe y Mercado Pago, aviso de privacidad LFPDPPP 2025 y seguridad SaaS.
+- Construí Chambeadores, una oficina virtual con demo publicada y pruebas automáticas en Linux, macOS y Windows.
+- Armé el enrutador de modelos de Claude Code: manda tareas fáciles a Sonnet y midió su ahorro con mi historial.
+- Documenté el kit SaaS para LATAM con cumplimiento mexicano, seguridad, pagos con webhooks firmados y políticas RLS en Supabase.
 
-<sub>últimos 30 días · resumido por un modelo a partir de 39 commits en 3 repos · último commit: 2026-10-25</sub>
-<!-- changelog:hash:d982874d10cf -->
+<sub>últimos 30 días · resumido por un modelo a partir de 44 commits en 4 repos · último commit: 2026-10-25</sub>
+<!-- changelog:hash:8189769eb5ec -->
 <!-- changelog:end -->
 
 <p align="center">
