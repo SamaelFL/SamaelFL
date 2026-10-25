@@ -1,3 +1,5 @@
+<p align="right"><sub><b>Español</b> · <a href="https://github.com/SamaelFL/SamaelFL/blob/main/README.en.md">English</a></sub></p>
+
 <a href="https://github.com/SamaelFL"><img src="assets/hero.svg" alt="Ismael Florean. Diseño el sistema. Los agentes hacen el turno de noche. Ilustración: oficina virtual en isométrico con un capataz y cuatro peones." width="100%"></a>
 
 <a href="https://github.com/SamaelFL/enrutador"><img src="assets/destacado.svg" alt="enrutador: Mi plan de Claude se acababa a media semana. Ahora cierro la semana con 40% de sobra. Un mod de ~500 líneas que decide, pedido por pedido, si basta Sonnet o hace falta Opus. Haiku clasifica en ~1 s y, ante la duda, gana Opus. Diagrama: los pedidos pasan por el clasificador y llegan a Sonnet o a Opus." width="100%"></a>
@@ -16,13 +18,7 @@
 
 <img src="assets/stack.svg" alt="modelos: Claude API, LLMs locales con Ollama, embeddings; orquestación: agentes y subagentes, tool use, RAG con pgvector, n8n; producto: React, TypeScript, Vite, Supabase, Vercel, Capacitor; backend: Java 17, Spring Boot, PostgreSQL, Node" width="100%">
 
-<img src="assets/bitacora.svg" alt="Bitácora de la semana. Un modelo lee mis commits públicos y escribe aquí qué construí. Sin editar." width="100%">
-
 <!-- changelog:start -->
-- Renombré el proyecto Chambeadores, le agregué un GIF al README y publiqué una demo en GitHub Pages.
-- Construí una oficina virtual con una caseta isométrica nocturna y un látigo como elemento visual.
-
-<sub>semana al 2026-10-12 · resumido por un modelo a partir de 2 commits en 1 repo</sub>
 <!-- changelog:end -->
 
 <p align="center">

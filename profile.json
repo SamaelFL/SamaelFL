@@ -181,8 +181,8 @@
       ]
     ]
   ],
-  "log_title": "Bitácora de la semana",
-  "log_note": "Un modelo lee mis commits públicos y escribe aquí qué construí. Sin editar.",
+  "log_title": "Lo último que construí",
+  "log_note": "Un modelo lee mis commits públicos de los últimos 30 días y escribe aquí qué construí. Sin editar.",
   "contact": [
     {
       "label": "LinkedIn",
@@ -204,5 +204,16 @@
   "changelog_repos": [
     "SamaelFL/Chambeadores",
     "SamaelFL/enrutador"
-  ]
+  ],
+  "ui": {
+    "status": {
+      "live": "En producción",
+      "open": "Código abierto",
+      "soon": "Próximamente"
+    },
+    "log_badge": "automático · últimos 30 días",
+    "hero_alt": "Ilustración: oficina virtual en isométrico con un capataz y cuatro peones.",
+    "featured_alt": "Diagrama: los pedidos pasan por el clasificador y llegan a Sonnet o a Opus.",
+    "lang_switch": "<b>Español</b> · <a href=\"https://github.com/SamaelFL/SamaelFL/blob/main/README.en.md\">English</a>"
+  }
 }

@@ -1,0 +1,215 @@
+{
+  "user": "SamaelFL",
+  "name": "Ismael Florean",
+  "role": "AI Engineer",
+  "company": "SAID Co.",
+  "hero_lines": [
+    "I design the system.",
+    "The agents work",
+    "the night shift."
+  ],
+  "hero_role": "AI Engineer in Mexico City. Founder of SAID Co., where I build AI products end to end.",
+  "hero_caption": "Virtual office, night shift. The one in the white hard hat is me.",
+  "hero_caption_right": "CDMX, 2:47 a.m.",
+  "featured": {
+    "name": "enrutador",
+    "badge": "New · open source · Claude Code mod",
+    "headline": [
+      "My Claude plan ran out by midweek.",
+      "Now I end the week with ",
+      "40%",
+      " to spare."
+    ],
+    "desc": "A ~500-line mod that decides, request by request, whether Sonnet is enough or Opus is needed. Haiku classifies in ~1 s and, when in doubt, Opus wins.",
+    "requests": [
+      [
+        "rename this variable",
+        "sonnet"
+      ],
+      [
+        "what does this regex do?",
+        "sonnet"
+      ],
+      [
+        "login is broken",
+        "opus"
+      ],
+      [
+        "design the migration",
+        "opus"
+      ]
+    ],
+    "classifier": [
+      "Haiku",
+      "classifies · ~1 s"
+    ],
+    "lanes": {
+      "sonnet": [
+        "Sonnet",
+        "trivial and simple",
+        "low · medium"
+      ],
+      "opus": [
+        "Opus",
+        "sensitive or unsure",
+        "medium · high"
+      ]
+    },
+    "label": "github.com/SamaelFL/enrutador",
+    "url": "https://github.com/SamaelFL/enrutador",
+    "week_title": "My plan over one week",
+    "week_note": "my real usage, not a benchmark",
+    "days": [
+      "M",
+      "T",
+      "W",
+      "T",
+      "F",
+      "S",
+      "S"
+    ],
+    "rows": [
+      [
+        "Opus only",
+        "before",
+        "limit hit · no Claude for the rest of the week"
+      ],
+      [
+        "With enrutador",
+        "now",
+        "60% used · 40% to spare"
+      ]
+    ],
+    "statuses": [
+      "rename this variable  →  Sonnet · low · trivial",
+      "what does this regex do?  →  Sonnet · low · trivial",
+      "login is broken  →  Opus · medium · medium",
+      "design the migration  →  Opus · high · complex"
+    ],
+    "cta": "Try it free · github.com/SamaelFL/enrutador"
+  },
+  "statement": [
+    "The hard part isn't the model.",
+    "It's making it work on a Tuesday at 3 a.m."
+  ],
+  "facts": [
+    [
+      "2",
+      "AI products in production, with users and paid plans."
+    ],
+    [
+      "30+",
+      "custom skills that teach my agents how I work."
+    ],
+    [
+      "2023",
+      "the year I wrote my first line of code. Before that, sales and operations."
+    ]
+  ],
+  "deployments": [
+    {
+      "name": "Gym Coach Pro",
+      "status": "live",
+      "object": "dumbbell",
+      "desc": "AI gym coach: routines for your equipment and goal, and meals from what you already have.",
+      "label": "gymcoachpro.app",
+      "url": "https://gymcoachpro.app"
+    },
+    {
+      "name": "HiredgeCV",
+      "status": "live",
+      "object": "cv",
+      "desc": "AI CVs and cover letters tailored to each job posting and built to pass ATS filters.",
+      "label": "hiredgecv.com",
+      "url": "https://hiredgecv.com"
+    },
+    {
+      "name": "Chambeadores",
+      "status": "open",
+      "object": "peon",
+      "desc": "Virtual office with a whip: each crack splits long tasks among workers (subagents). With sound.",
+      "label": "github.com/SamaelFL/Chambeadores",
+      "url": "https://github.com/SamaelFL/Chambeadores"
+    },
+    {
+      "name": "Kit SaaS LATAM",
+      "status": "soon",
+      "object": "toolbox",
+      "desc": "Agent skills for what nobody explains in Mexico: privacy law, CFDI, MercadoPago, RLS and security.",
+      "label": "Open source",
+      "url": "https://github.com/SamaelFL"
+    }
+  ],
+  "stack_title": "What I build with",
+  "stack_note": "What runs in production today",
+  "stack": [
+    [
+      "models",
+      [
+        "Claude API",
+        "local LLMs with Ollama",
+        "embeddings"
+      ]
+    ],
+    [
+      "orchestration",
+      [
+        "agents and subagents",
+        "tool use",
+        "RAG with pgvector",
+        "n8n"
+      ]
+    ],
+    [
+      "product",
+      [
+        "React",
+        "TypeScript",
+        "Vite",
+        "Supabase",
+        "Vercel",
+        "Capacitor"
+      ]
+    ],
+    [
+      "backend",
+      [
+        "Java 17",
+        "Spring Boot",
+        "PostgreSQL",
+        "Node"
+      ]
+    ]
+  ],
+  "log_title": "What I've been building",
+  "log_note": "A model reads my public commits from the last 30 days and writes here what I built. Unedited.",
+  "contact": [
+    {
+      "label": "LinkedIn",
+      "value": "in/ismaelflorean",
+      "url": "https://www.linkedin.com/in/ismaelflorean"
+    },
+    {
+      "label": "Gym Coach Pro",
+      "value": "gymcoachpro.app",
+      "url": "https://gymcoachpro.app"
+    },
+    {
+      "label": "HiredgeCV",
+      "value": "hiredgecv.com",
+      "url": "https://hiredgecv.com"
+    }
+  ],
+  "footer": "Every image on this profile comes from code: <code>scripts/build.py</code> draws the office box by box.",
+  "ui": {
+    "status": {
+      "live": "In production",
+      "open": "Open source",
+      "soon": "Coming soon"
+    },
+    "log_badge": "automatic · last 30 days",
+    "hero_alt": "Illustration: isometric virtual office with a foreman and four workers.",
+    "featured_alt": "Diagram: requests go through the classifier and land on Sonnet or Opus.",
+    "lang_switch": "<a href=\"https://github.com/SamaelFL\">Español</a> · <b>English</b>"
+  }
+}

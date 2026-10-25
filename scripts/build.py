@@ -1,4 +1,5 @@
-"""Genera las placas SVG del perfil y el README a partir de profile.json.
+"""Genera las placas SVG del perfil y los README a partir de profile.json (español) y
+profile.en.json (inglés).
 
 Uso:  python scripts/build.py
 Requiere: fonttools y brotli (pip install fonttools brotli)
@@ -401,7 +402,7 @@ def featured(f):
     return svg.render()
 
 
-def product(d, i):
+def product(d, i, ui):
     w, h = 432, 336
     svg = Svg(w, h, d["name"])
     plate(svg, rx=20, fill=C["superficie"])
@@ -413,7 +414,7 @@ def product(d, i):
     )
     live = d["status"] in ("live", "open")
     color = C["verde"] if d["status"] == "live" else C["apoyo"] if d["status"] == "open" else C["acento"]
-    label = {"live": "En producción", "open": "Código abierto"}.get(d["status"], "Próximamente")
+    label = ui["status"].get(d["status"], ui["status"]["soon"])
     if live:
         svg.add(
             f'<circle cx="30" cy="34" r="3.5" fill="{color}"/><circle cx="30" cy="34" r="3.5" fill="none" stroke="{color}">'
@@ -437,7 +438,7 @@ def product(d, i):
 def stack(p):
     rows = p["stack"]
     H = 120 + 54 * len(rows) + 14
-    svg = Svg(W, H, "Con qué construyo")
+    svg = Svg(W, H, p["stack_title"])
     plate(svg)
     svg.add(svg.text(48, 78, p["stack_title"], "as6", 26, C["texto"], spacing=-0.4))
     svg.add(svg.text(W - 48, 78, p["stack_note"], "gs4", 14, C["texto2"], anchor="end"))
@@ -460,7 +461,7 @@ def log_header(p):
     svg.add(
         f'<circle cx="{W - 60}" cy="57" r="4" fill="{C["apoyo"]}"><animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/></circle>'
     )
-    svg.add(svg.text(W - 74, 61, "automático, cada lunes", "gm4", 11, C["texto2"], anchor="end"))
+    svg.add(svg.text(W - 74, 61, p["ui"]["log_badge"], "gm4", 11, C["texto2"], anchor="end"))
     plate_end(svg)
     return svg.render()
 
@@ -478,19 +479,27 @@ def contact(c):
 
 # ---------------------------------------------------------------- README
 
-CHANGELOG_DEFAULT = "_Todavía no hay corridas: el primer resumen llega el lunes después del primer commit público._"
+BLOCK_RE = re.compile(r"<!-- changelog:start -->\n(.*?)<!-- changelog:end -->", re.S)
+
+LANGS = {
+    "es": {"profile": "profile.json", "readme": "README.md", "suffix": ""},
+    "en": {"profile": "profile.en.json", "readme": "README.en.md", "suffix": "-en"},
+}
 
 
-def img(name, alt, width="100%"):
-    return f'<img src="assets/{name}.svg" alt="{escape(alt)}" width="{width}">'
+def readme(p, cfg):
+    sfx = cfg["suffix"]
+    ui = p["ui"]
 
+    def img(name, alt, width="100%"):
+        return f'<img src="assets/{name}{sfx}.svg" alt="{escape(alt, {chr(34): "&quot;"})}" width="{width}">'
 
-def readme(p):
-    path = ROOT / "README.md"
-    block = CHANGELOG_DEFAULT
+    # la bitácora la escribe changelog.py; aquí solo se conserva lo que ya haya
+    path = ROOT / cfg["readme"]
+    block = ""
     if path.exists():
-        m = re.search(r"<!-- changelog:start -->\n(.*?)\n<!-- changelog:end -->", path.read_text(), re.S)
-        if m and "Todavía no hay corridas" not in m.group(1) and "> " not in m.group(1)[:2]:
+        m = BLOCK_RE.search(path.read_text())
+        if m and "changelog:hash:" in m.group(1):
             block = m.group(1)
 
     prods = [
@@ -502,18 +511,17 @@ def readme(p):
         f'<a href="{c["url"]}">{img(f"contacto-{i + 1}", c["label"] + ": " + c["value"], "32%")}</a>'
         for i, c in enumerate(p["contact"])
     )
-    hero_alt = f"{p['name']}. {' '.join(p['hero_lines'])} Ilustración: oficina virtual en isométrico con un capataz y cuatro peones."
+    hero_alt = f"{p['name']}. {' '.join(p['hero_lines'])} {ui['hero_alt']}"
     facts = " ".join(f"{n}: {l}" for n, l in p["facts"])
     stack_alt = "; ".join(f"{g}: {', '.join(i)}" for g, i in p["stack"])
     feat = ""
     if "featured" in p:
         f = p["featured"]
-        feat_alt = (
-            f"{f['name']}: {f['headline'][0]} {''.join(f['headline'][1:])} {f['desc']} "
-            "Diagrama: los pedidos pasan por el clasificador y llegan a Sonnet o a Opus."
-        )
+        feat_alt = f"{f['name']}: {f['headline'][0]} {''.join(f['headline'][1:])} {f['desc']} {ui['featured_alt']}"
         feat = f'<a href="{f["url"]}">{img("destacado", feat_alt)}</a>\n\n'
-    return f"""<a href="https://github.com/{p['user']}">{img('hero', hero_alt)}</a>
+    return f"""<p align="right"><sub>{ui['lang_switch']}</sub></p>
+
+<a href="https://github.com/{p['user']}">{img('hero', hero_alt)}</a>
 
 {feat}{img('manifiesto', ' '.join(p['statement']) + ' ' + facts)}
 
@@ -521,11 +529,8 @@ def readme(p):
 
 {img('stack', stack_alt)}
 
-{img('bitacora', p['log_title'] + '. ' + p['log_note'])}
-
 <!-- changelog:start -->
-{block}
-<!-- changelog:end -->
+{block}<!-- changelog:end -->
 
 <p align="center">
 {links}
@@ -536,21 +541,25 @@ def readme(p):
 
 
 def main():
-    p = json.loads((ROOT / "profile.json").read_text())
     ASSETS.mkdir(exist_ok=True)
     for old in ASSETS.glob("*.svg"):
         old.unlink()
-    out = {"hero": hero(p), "manifiesto": manifesto(p), "stack": stack(p), "bitacora": log_header(p)}
-    if "featured" in p:
-        out["destacado"] = featured(p["featured"])
-    for i, d in enumerate(p["deployments"]):
-        out[f"producto-{i + 1}"] = product(d, i)
-    for i, c in enumerate(p["contact"]):
-        out[f"contacto-{i + 1}"] = contact(c)
-    for name, content in out.items():
-        (ASSETS / f"{name}.svg").write_text(content)
-    (ROOT / "README.md").write_text(readme(p))
-    print("listo:", ", ".join(f"{n} {len(c) // 1024}KB" for n, c in out.items()))
+    report = []
+    for cfg in LANGS.values():
+        p = json.loads((ROOT / cfg["profile"]).read_text())
+        sfx = cfg["suffix"]
+        out = {"hero": hero(p), "manifiesto": manifesto(p), "stack": stack(p), "bitacora": log_header(p)}
+        if "featured" in p:
+            out["destacado"] = featured(p["featured"])
+        for i, d in enumerate(p["deployments"]):
+            out[f"producto-{i + 1}"] = product(d, i, p["ui"])
+        for i, c in enumerate(p["contact"]):
+            out[f"contacto-{i + 1}"] = contact(c)
+        for name, content in out.items():
+            (ASSETS / f"{name}{sfx}.svg").write_text(content)
+        (ROOT / cfg["readme"]).write_text(readme(p, cfg))
+        report.append(f"{cfg['readme']}: " + ", ".join(f"{n} {len(c) // 1024}KB" for n, c in out.items()))
+    print("listo:\n" + "\n".join(report))
 
 
 if __name__ == "__main__":
