@@ -417,7 +417,90 @@ def obj_toolbox(v):
     return items
 
 
-def product_object(svg, kind, cx, cy, max_w, max_h):
+# ---------------------------------------------------------------- animaciones de producto
+# SMIL dentro del SVG: GitHub lo reproduce porque la imagen se sirve tal cual (sin JavaScript).
+
+def _ease(n):
+    return ";".join(["0.45 0 0.25 1"] * n)
+
+
+def anim_dumbbell(v, items, svg):
+    base = render_scene(v, items[:1])
+    peso = render_scene(v, items[1:])
+    sx, sy = v.p(0, 0, 0.6)
+    rx, ry = 1.9 * v.s, 0.55 * v.s
+    d = 1.15 * v.s
+    sombra = (
+        f'<ellipse cx="{sx:.1f}" cy="{sy:.1f}" rx="{rx:.1f}" ry="{ry:.1f}" fill="#000" opacity="0.32">'
+        f'<animate attributeName="opacity" values="0.32;0.12;0.12;0.32;0.32" keyTimes="0;0.35;0.55;0.85;1" '
+        f'calcMode="spline" keySplines="{_ease(4)}" dur="2.6s" repeatCount="indefinite"/>'
+        f'<animate attributeName="rx" values="{rx:.1f};{rx * 0.7:.1f};{rx * 0.7:.1f};{rx:.1f};{rx:.1f}" keyTimes="0;0.35;0.55;0.85;1" '
+        f'calcMode="spline" keySplines="{_ease(4)}" dur="2.6s" repeatCount="indefinite"/></ellipse>'
+    )
+    sube = (
+        f'<g>{peso}<animateTransform attributeName="transform" type="translate" '
+        f'values="0 0;0 {-d:.1f};0 {-d:.1f};0 0;0 0" keyTimes="0;0.35;0.55;0.85;1" calcMode="spline" '
+        f'keySplines="{_ease(4)}" dur="2.6s" repeatCount="indefinite"/></g>'
+    )
+    return base + sombra + sube
+
+
+def anim_cv(v, items, svg):
+    base = render_scene(v, items[:1])
+    hojas = render_scene(v, items[1:4])
+    sello = render_scene(v, items[4:])
+    z = 0.6 + 2 * 0.12 + 0.12
+    escaneo = (
+        f'<g transform="{v.plane_z(z)}"><rect x="-1.0" y="-1.3" width="2.3" height="0.07" fill="{P["glow"]}" opacity="0">'
+        '<animate attributeName="y" values="-1.3;1.55;1.55" keyTimes="0;0.55;1" dur="3.2s" repeatCount="indefinite"/>'
+        '<animate attributeName="opacity" values="0;0.9;0.9;0;0" keyTimes="0;0.05;0.5;0.56;1" dur="3.2s" repeatCount="indefinite"/>'
+        '</rect></g>'
+    )
+    cae = 1.4 * v.s
+    sello_anim = (
+        f'<g opacity="0">{sello}'
+        f'<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.55;0.62;0.92;1" dur="3.2s" repeatCount="indefinite"/>'
+        f'<animateTransform attributeName="transform" type="translate" values="0 {-cae:.1f};0 {-cae:.1f};0 0;0 0" '
+        f'keyTimes="0;0.55;0.64;1" calcMode="spline" keySplines="0 0 1 1;0.6 0 0.9 1;0 0 1 1" dur="3.2s" repeatCount="indefinite"/></g>'
+    )
+    flota = (
+        f'<g>{hojas}{escaneo}{sello_anim}<animateTransform attributeName="transform" type="translate" '
+        f'values="0 0;0 {-0.12 * v.s:.1f};0 0" keyTimes="0;0.5;1" calcMode="spline" keySplines="{_ease(2)}" '
+        f'dur="3.2s" repeatCount="indefinite"/></g>'
+    )
+    return base + flota
+
+
+def anim_toolbox(v, items, svg):
+    fijo = render_scene(v, items[:2] + items[6:])
+    tapa = render_scene(v, items[2:6])
+    d = 0.35 * v.s
+    t = 3.0
+    abre = (
+        f'<g>{tapa}<animateTransform attributeName="transform" type="translate" '
+        f'values="0 0;0 {-d:.1f};0 {-d:.1f};0 0;0 0" keyTimes="0;0.15;0.6;0.75;1" calcMode="spline" '
+        f'keySplines="{_ease(4)}" dur="{t}s" repeatCount="indefinite"/></g>'
+    )
+    colores = [P["amber"], P["glow"], "#3FB950", P["white_hat"]]
+    cubos = []
+    for i, (x, col) in enumerate(zip((-1.05, -0.4, 0.25, 0.9), colores)):
+        cubo = render_scene(v, [Box(x - 0.03, -0.21, 1.95, 0.44, 0.44, 0.44, col)])
+        ini = 0.12 + i * 0.07
+        fin = min(ini + 0.45, 0.95)
+        sube = 2.2 * v.s
+        cubos.append(
+            f'<g opacity="0">{cubo}'
+            f'<animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;{ini:.2f};{ini + 0.08:.2f};{fin:.2f};1" dur="{t}s" repeatCount="indefinite"/>'
+            f'<animateTransform attributeName="transform" type="translate" values="0 0;0 0;0 {-sube:.1f};0 {-sube:.1f}" '
+            f'keyTimes="0;{ini:.2f};{fin:.2f};1" calcMode="spline" keySplines="0 0 1 1;0.2 0.6 0.4 1;0 0 1 1" dur="{t}s" repeatCount="indefinite"/></g>'
+        )
+    return fijo + abre + "".join(cubos)
+
+
+ANIMADOS = {"dumbbell": anim_dumbbell, "cv": anim_cv, "toolbox": anim_toolbox}
+
+
+def product_object(svg, kind, cx, cy, max_w, max_h, animar=False):
     from iso import _screen_box
     fn = {"dumbbell": obj_dumbbell, "peon": obj_peon, "toolbox": obj_toolbox}
 
@@ -431,4 +514,6 @@ def product_object(svg, kind, cx, cy, max_w, max_h):
     s = 10 * min(max_w / (x1 - x0), max_h / (y1 - y0))
     k = s / 10
     v = View(s, cx - (x0 + x1) / 2 * k, cy - (y0 + y1) / 2 * k)
+    if animar and kind in ANIMADOS:
+        return ANIMADOS[kind](v, build(v), svg)
     return render_scene(v, build(v))

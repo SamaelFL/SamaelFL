@@ -3,7 +3,7 @@ name: perfil
 on:
   push:
     branches: [main]
-    paths: [profile.json, profile.en.json, scripts/build.py]
+    paths: [profile.json, profile.en.json, "scripts/**"]
   schedule:
     - cron: "7 14 * * *" # diario, 8:07 a. m. CDMX; si no hay commits nuevos no hace nada
   workflow_dispatch:

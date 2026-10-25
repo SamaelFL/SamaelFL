@@ -410,7 +410,7 @@ def product(d, i, ui):
         '<defs><radialGradient id="spot" cx="0.5" cy="0.38" r="0.55">'
         f'<stop offset="0" stop-color="#202942"/><stop offset="1" stop-color="{C["superficie"]}" stop-opacity="0"/></radialGradient></defs>',
         f'<rect width="{w}" height="200" fill="url(#spot)"/>',
-        product_object(svg, d["object"], w / 2, 120, 250, 128),
+        product_object(svg, d["object"], w / 2, 120, 250, 128, animar=True),
     )
     live = d["status"] in ("live", "open")
     color = C["verde"] if d["status"] == "live" else C["apoyo"] if d["status"] == "open" else C["acento"]
