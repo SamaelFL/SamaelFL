@@ -28,13 +28,13 @@
 <!-- changelog-en:start -->
 <img src="assets/bitacora-en.svg" alt="What I've been building. A model reads my public commits from the last 30 days and writes here what I built. Unedited." width="100%">
 
-- I built Chambeadores, a project with CI on Linux, macOS, and Windows, plus automated releases.
-- I built the Claude Code router in v2: it compacts sessions past 200k and runs subagents on Sonnet.
-- I created kit-saas-latam, with Mexico legal templates, SaaS security, and Stripe and Mercado Pago payments.
-- I built acreditador, a service with signed Stripe and Mercado Pago webhooks that credits each payment only once.
+- I built Chambeadores, a server with cross-platform tests on Linux, macOS, and Windows, plus automatic publishing.
+- I built enrutador, a Claude Code plugin that routes each turn to Opus or Sonnet based on difficulty.
+- I built kit-saas-latam, a SaaS kit for Mexico covering LFPDPPP compliance, CFDI 4.0, payments, and security.
+- I built acreditador, a Stripe and Mercado Pago webhook service that credits each payment exactly once.
 
-<sub>last 30 days · summarized by a model from 44 commits in 4 repos · last commit: 2026-10-25</sub>
-<!-- changelog:hash:2383b2e3dd68 -->
+<sub>last 30 days · summarized by a model from 42 commits in 4 repos · last commit: 2026-10-25</sub>
+<!-- changelog:hash:739adc2112fc -->
 <!-- changelog-en:end -->
 
 <p align="center">
@@ -77,13 +77,13 @@
 <!-- changelog:start -->
 <img src="assets/bitacora.svg" alt="Lo último que construí. Un modelo lee mis commits públicos de los últimos 30 días y escribe aquí qué construí. Sin editar." width="100%">
 
-- Construí Chambeadores, un proyecto con CI en Linux, macOS y Windows, y releases con publicación automática.
-- Armé el enrutador de Claude Code en la v2: compacta la sesión al pasar de 200k y usa Sonnet en subagentes.
-- Creé kit-saas-latam, con plantillas legales para México, seguridad SaaS y pagos con Stripe y Mercado Pago.
-- Construí acreditador, un servicio con webhooks firmados de Stripe y Mercado Pago que acredita cada pago una sola vez.
+- Construí Chambeadores, un servidor con pruebas multiplataforma en Linux, macOS y Windows, y publicación automática.
+- Construí enrutador, un plugin de Claude Code que manda cada turno a Opus o Sonnet según la dificultad.
+- Armé kit-saas-latam, un kit para SaaS en México con cumplimiento LFPDPPP, CFDI 4.0, pagos y seguridad.
+- Construí acreditador, un servicio de webhooks de Stripe y Mercado Pago con acreditación única por pago.
 
-<sub>últimos 30 días · resumido por un modelo a partir de 44 commits en 4 repos · último commit: 2026-10-25</sub>
-<!-- changelog:hash:2383b2e3dd68 -->
+<sub>últimos 30 días · resumido por un modelo a partir de 42 commits en 4 repos · último commit: 2026-10-25</sub>
+<!-- changelog:hash:739adc2112fc -->
 <!-- changelog:end -->
 
 <p align="center">
